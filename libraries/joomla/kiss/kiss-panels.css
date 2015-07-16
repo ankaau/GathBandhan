@@ -1,0 +1,214 @@
+/* -- TAB STYLES ----------------------------- */
+dl.tabs {
+	float: left;
+	margin: 10px 0 -1px 0!important;
+	z-index: 50;
+}
+
+dl.tabs dt {
+	height: auto;
+	float: left;
+	padding: 0 10px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-top: 3px solid #c8b283;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;	
+	margin-left: 3px;
+	color: #666;
+	background-color: #fafafa;
+}
+
+dl.tabs dt.open {
+	border-top: 3px solid #4ac400;
+	border-bottom: 1px solid #fafafa;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;	
+	z-index: 100;
+	color: #000 !important;
+}
+
+dl.tabs dt:hover {
+	border-top: 3px solid #ffc600;
+	color: #a98300 !important;
+}
+
+div.current {
+	clear: both;
+	border: 1px solid #ccc;
+	padding: 10px 10px !important;
+	background-color: #fafafa;
+	max-width: 100% !important;
+	overflow: auto !important;
+}
+
+
+div.current dd {
+	padding: 0;
+	margin: 0;
+}
+
+dl#content-pane.tabs {
+	margin: 1px 0 0 0;
+}
+
+
+div.current label,
+div.current span.faux-label {
+/*
+	display: block;
+	float: left !important;
+	clear: both;
+*/	
+	min-width: 180px;
+	padding: 6px;
+	color: #444444;
+}
+
+div.current fieldset {
+	border: none 0;
+	min-width: 35%;
+}
+
+div.current fieldset.adminform { 	 
+	border: 1px #ccc solid;
+}
+/*
+div.current fieldset.radio {
+	float: inherit;
+	width: auto !important;
+}
+
+div.current fieldset.radio input {
+	clear: none;
+	width: 15px;
+	float: inherit;
+	margin: 3px 0 0 2px;
+}
+
+div.current fieldset.radio label {
+	clear: none;
+	min-width: 45px;
+	float: left;
+	margin: 3px 0 0 5px;
+}
+
+div.current fieldset.checkboxes {
+	float: left;
+	clear: right;
+}
+
+div.current fieldset.checkboxes input {
+	clear: left;
+	min-width: 15px;
+	float: left;
+	margin: 3px 0 0 2px;
+}
+
+div.current fieldset.checkboxes label {
+	clear: right;
+	min-width: 45px;
+	margin: 3px 0 0 5px;
+}
+*/
+div.current input,
+div.current textarea,
+div.current select {
+	clear: none;
+	float: inherit;
+	margin: 3px 0 0 2px;
+}
+
+div.current select {
+	margin-bottom: 15px;
+}
+
+p.tab-description {
+	font-size: 1.091em;
+	margin-left: 0;
+	margin-top: 5px;
+}
+
+li, dd {
+	margin-left:1em;
+	list-style:none;
+}
+
+h3 {
+	line-height: 17px !important;
+}
+.panel h3.pane-toggler {
+	background-image: linear-gradient(bottom, rgb(166,166,166) 25%, rgb(212,212,212) 63%) !important;
+	background-image: -o-linear-gradient(bottom, rgb(166,166,166) 25%, rgb(212,212,212) 63%) !important;
+	background-image: -moz-linear-gradient(bottom, rgb(166,166,166) 25%, rgb(212,212,212) 63%) !important;
+	background-image: -webkit-linear-gradient(bottom, rgb(166,166,166) 25%, rgb(212,212,212) 63%) !important;
+	background-image: -ms-linear-gradient(bottom, rgb(166,166,166) 25%, rgb(212,212,212) 63%) !important;
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.25, rgb(166,166,166)),
+		color-stop(0.63, rgb(212,212,212))
+	) !important;
+  border           : 1px;
+  border-style	   : outset;
+  border-color     : #141414;
+  border-radius	   : 6px 6px 6px 6px;
+  margin-top       : 0px;
+  height			: 18px;
+  padding          : 0px 3px 5px 3px !important;
+  color            : #333333;
+  vertical-align   : middle;	  
+  line-height		: 17px !important;	    
+}
+
+.panel h3.pane-toggler-down {
+	background-image: linear-gradient(bottom, rgb(207,197,178) 24%, rgb(232,220,232) 62%, rgb(240,232,240) 81%) !important;
+	background-image: -o-linear-gradient(bottom, rgb(207,197,178) 24%, rgb(232,220,232) 62%, rgb(240,232,240) 81%) !important;
+	background-image: -moz-linear-gradient(bottom, rgb(207,197,178) 24%, rgb(232,220,232) 62%, rgb(240,232,240) 81%) !important;
+	background-image: -webkit-linear-gradient(bottom, rgb(207,197,178) 24%, rgb(232,220,232) 62%, rgb(240,232,240) 81%) !important;
+	background-image: -ms-linear-gradient(bottom, rgb(207,197,178) 24%, rgb(232,220,232) 62%, rgb(240,232,240) 81%) !important;
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.24, rgb(207,197,178)),
+		color-stop(0.62, rgb(232,220,232)),
+		color-stop(0.81, rgb(240,232,240))
+	)!important;
+  border           : 1px;
+  border-style	   : outset;
+  border-color     : #141414;
+  border-radius	   : 6px 6px 6px 6px;
+  margin-top       : 0px;
+  height			: 18px;
+  padding          : 0px 3px 5px 3px !important;
+  color            : #440000;
+  vertical-align   : middle;
+  line-height		: 17px !important;
+}
+
+.panel h3.pane-toggler a
+{
+background			: none !important;
+background-image	: none;
+color				: blue;
+}
+.panel h3.pane-toggler-down a
+{
+background			: none !important;
+background-image	: none;
+color				: red;
+}
+
+.panel h3 {
+  font-size	   : 100% !important;  
+}
+.panel h3.pane-toggler-down a span {
+  vertical-align   : bottom;  
+}
+img.sliderimage {
+  float		 	: left; 
+  margin-right	: 10px;
+}
+

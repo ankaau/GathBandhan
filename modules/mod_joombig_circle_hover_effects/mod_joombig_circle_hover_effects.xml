@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" client="site" method="upgrade">
+  <name>joombig circle hover effects</name>
+    <description>MODULE_DESC</description>
+  <languages>
+    <language tag="en-GB">language/en-GB.mod_joombig_circle_hover_effects.ini</language>
+  </languages>
+  <files>
+    <filename module="mod_joombig_circle_hover_effects">mod_joombig_circle_hover_effects.php</filename>
+    <filename>helper.php</filename>
+    <filename>index.html</filename>
+    <folder>tmpl/</folder>
+    <folder>fields/</folder>
+    <folder>helpers/</folder>
+    <folder>language/</folder>
+    <folder>assets/</folder>
+  </files>
+  <config>
+    <fields name="params">
+      <fieldset name="basic" addfieldpath="/modules/mod_joombig_circle_hover_effects/fields">
+        <field type="assets" url="/modules/mod_joombig_circle_hover_effects/assets" />
+        <field type="tmpl" name="sp_style" default="Circlehovereffects"  label="STYLE" description="STYLE_DESC" />
+		<field name="width_module" type="text" default="100%" label="Width of Module(%)" description="Width of Module(%)" />
+		<!--<field name="height_module" type="text" default="350" label="height of Module" description="Height without px" />	-->
+		<field name="left_module" type="text" default="0%" label="Left of Module(%)" description="Left without %" />
+		<field name="width_item" type="text" default="218" label="Diameter of circle" description="Diameter without px" />
+		<field name="border_circle" type="text" default="16" label="Border of circle" description="Border without px" />
+		<field name="border_color" type="list" default="0" label="Border color of circle" description="Select color">
+			<option value="0">AliceBlue</option>
+			<option value="1">AntiqueWhite</option>
+			<option value="2">Aqua</option>
+			<option value="3">Aquamarine</option>
+			<option value="4">Azure</option>
+			<option value="5">Beige</option>
+			<option value="6">Bisque</option>
+			<option value="7">Black</option>
+			<option value="8">BlanchedAlmond</option>
+			<option value="9">Blue</option>
+			<option value="10">BlueViolet</option>
+			<option value="11">Brown</option>
+			<option value="12">BurlyWood</option>
+			<option value="13">CadetBlue</option>
+			<option value="14">Chartreuse</option>
+			<option value="15">Chocolate</option>
+			<option value="16">Coral</option>
+			<option value="17">CornflowerBlue</option>
+			<option value="18">Cornsilk</option>
+			<option value="19">Crimson</option>
+			<option value="20">Cyan</option>
+			<option value="21">DarkBlue</option>
+			<option value="22">DarkCyan</option>
+			<option value="23">DarkGoldenRod</option>
+			<option value="24">DarkGray</option>
+			<option value="25">DarkGreen</option>
+			<option value="26">DarkKhaki</option>
+			<option value="27">DarkMagenta</option>
+			<option value="28">DarkOliveGreen</option>
+			<option value="29">DarkOrange</option>
+			<option value="30">DarkOrchid</option>
+			<option value="31">DarkRed</option>
+			<option value="32">DarkSalmon</option>
+			<option value="33">DarkSeaGreen</option>
+			<option value="34">DarkSlateBlue</option>
+			<option value="35">DarkSlateGray</option>
+			<option value="36">DarkTurquoise</option>
+			<option value="37">DarkViolet</option>
+			<option value="38">DeepPink</option>
+			<option value="39">DeepSkyBlue</option>
+			<option value="40">DimGray</option>
+			<option value="41">DodgerBlue</option>
+			<option value="42">FireBrick</option>
+			<option value="43">FloralWhite</option>
+			<option value="44">ForestGreen</option>
+			<option value="45">Fuchsia</option>
+			<option value="46">Gainsboro</option>
+			<option value="47">GhostWhite</option>
+			<option value="48">Gold</option>
+			<option value="49">GoldenRod</option>
+			<option value="50">Gray</option>
+			<option value="51">Green</option>
+			<option value="52">GreenYellow</option>
+			<option value="53">HoneyDew</option>
+			<option value="54">HotPink</option>
+			<option value="55">IndianRed</option>
+			<option value="56">Indigo</option>
+			<option value="57">Ivory</option>
+			<option value="58">Khaki</option>
+			<option value="59">Lavender</option>
+			<option value="60">LavenderBlush</option>
+			<option value="61">LawnGreen</option>
+			<option value="62">LemonChiffon</option>
+			<option value="63">LightBlue</option>
+			<option value="64">LightCoral</option>
+			<option value="65">LightCyan</option>
+			<option value="66">LightGoldenRodYellow</option>
+			<option value="67">LightGray</option>
+			<option value="68">LightGreen</option>
+			<option value="69">LightPink</option>
+			<option value="70">LightSalmon</option>
+			<option value="71">LightSeaGreen</option>
+			<option value="72">LightSkyBlue</option>
+			<option value="73">LightSlateGray</option>
+			<option value="74">LightSteelBlue</option>
+			<option value="75">LightYellow</option>
+			<option value="76">Lime</option>
+			<option value="77">LimeGreen</option>
+			<option value="78">Linen</option>
+			<option value="79">Magenta</option>
+			<option value="80">Maroon</option>
+			<option value="81">MediumAquaMarine</option>
+			<option value="82">MediumBlue</option>
+			<option value="83">MediumOrchid</option>
+			<option value="84">MediumPurple</option>
+			<option value="85">MediumSeaGreen</option>
+			<option value="86">MediumSlateBlue</option>
+			<option value="87">MediumSpringGreen</option>
+			<option value="88">MediumTurquoise</option>
+			<option value="89">MediumVioletRed</option>
+			<option value="90">MidnightBlue</option>
+			<option value="91">MintCream</option>
+			<option value="92">MistyRose</option>
+			<option value="93">Moccasin</option>
+			<option value="94">NavajoWhite</option>
+			<option value="95">Navy</option>
+			<option value="96">OldLace</option>
+			<option value="97">Olive</option>
+			<option value="98">OliveDrab</option>
+			<option value="99">Orange</option>
+			<option value="100">OrangeRed</option>
+			<option value="101">Orchid</option>
+			<option value="102">PaleGoldenRod</option>
+			<option value="103">PaleGreen</option>
+			<option value="104">PaleTurquoise</option>
+			<option value="105">PaleVioletRed</option>
+			<option value="106">PapayaWhip</option>
+			<option value="107">PeachPuff</option>
+			<option value="108">Peru</option>
+			<option value="109">Pink</option>
+			<option value="110">Plum</option>
+			<option value="111">PowderBlue</option>
+			<option value="112">Purple</option>
+			<option value="113">Red</option>
+			<option value="114">RosyBrown</option>
+			<option value="115">RoyalBlue</option>
+			<option value="116">SaddleBrown</option>
+			<option value="117">Salmon</option>
+			<option value="118">SandyBrown</option>
+			<option value="119">SeaGreen</option>
+			<option value="120">SeaShell</option>
+			<option value="121">Sienna</option>
+			<option value="122">Silver</option>
+			<option value="123">SkyBlue</option>
+			<option value="124">SlateBlue</option>
+			<option value="125">SlateGray</option>
+			<option value="126">Snow</option>
+			<option value="127">SpringGreen</option>
+			<option value="128">SteelBlue</option>
+			<option value="129">Tan</option>
+			<option value="130">Teal</option>
+			<option value="131">Thistle</option>
+			<option value="132">Tomato</option>
+			<option value="133">Turquoise</option>
+			<option value="134">Violet</option>
+			<option value="135">Wheat</option>
+			<option value="136">White</option>
+			<option value="137">WhiteSmoke</option>
+			<option value="138">Yellow</option>
+			<option value="139">YellowGreen</option>
+		</field>
+		<field name="distance" type="text" default="10" label="Distance among the circles" description="Distance among the circles without px" />
+		<!--<field name="distance_bottom" type="text" default="0" label="Reduction distance bottom" description="Reduction distance bottom without px" />-->
+		<field name="dis_background_hover" type="list" default="1" label="Enable/Disable background when hover" description="Select Enable/Disable">
+			<option value="1">Enable</option>
+			<option value="0">Disable</option>
+		</field>
+		<field name="background_hover" type="list" default="0" label="Background color when hover" description="Select color">
+			<option value="0">AliceBlue</option>
+			<option value="1">AntiqueWhite</option>
+			<option value="2">Aqua</option>
+			<option value="3">Aquamarine</option>
+			<option value="4">Azure</option>
+			<option value="5">Beige</option>
+			<option value="6">Bisque</option>
+			<option value="7">Black</option>
+			<option value="8">BlanchedAlmond</option>
+			<option value="9">Blue</option>
+			<option value="10">BlueViolet</option>
+			<option value="11">Brown</option>
+			<option value="12">BurlyWood</option>
+			<option value="13">CadetBlue</option>
+			<option value="14">Chartreuse</option>
+			<option value="15">Chocolate</option>
+			<option value="16">Coral</option>
+			<option value="17">CornflowerBlue</option>
+			<option value="18">Cornsilk</option>
+			<option value="19">Crimson</option>
+			<option value="20">Cyan</option>
+			<option value="21">DarkBlue</option>
+			<option value="22">DarkCyan</option>
+			<option value="23">DarkGoldenRod</option>
+			<option value="24">DarkGray</option>
+			<option value="25">DarkGreen</option>
+			<option value="26">DarkKhaki</option>
+			<option value="27">DarkMagenta</option>
+			<option value="28">DarkOliveGreen</option>
+			<option value="29">DarkOrange</option>
+			<option value="30">DarkOrchid</option>
+			<option value="31">DarkRed</option>
+			<option value="32">DarkSalmon</option>
+			<option value="33">DarkSeaGreen</option>
+			<option value="34">DarkSlateBlue</option>
+			<option value="35">DarkSlateGray</option>
+			<option value="36">DarkTurquoise</option>
+			<option value="37">DarkViolet</option>
+			<option value="38">DeepPink</option>
+			<option value="39">DeepSkyBlue</option>
+			<option value="40">DimGray</option>
+			<option value="41">DodgerBlue</option>
+			<option value="42">FireBrick</option>
+			<option value="43">FloralWhite</option>
+			<option value="44">ForestGreen</option>
+			<option value="45">Fuchsia</option>
+			<option value="46">Gainsboro</option>
+			<option value="47">GhostWhite</option>
+			<option value="48">Gold</option>
+			<option value="49">GoldenRod</option>
+			<option value="50">Gray</option>
+			<option value="51">Green</option>
+			<option value="52">GreenYellow</option>
+			<option value="53">HoneyDew</option>
+			<option value="54">HotPink</option>
+			<option value="55">IndianRed</option>
+			<option value="56">Indigo</option>
+			<option value="57">Ivory</option>
+			<option value="58">Khaki</option>
+			<option value="59">Lavender</option>
+			<option value="60">LavenderBlush</option>
+			<option value="61">LawnGreen</option>
+			<option value="62">LemonChiffon</option>
+			<option value="63">LightBlue</option>
+			<option value="64">LightCoral</option>
+			<option value="65">LightCyan</option>
+			<option value="66">LightGoldenRodYellow</option>
+			<option value="67">LightGray</option>
+			<option value="68">LightGreen</option>
+			<option value="69">LightPink</option>
+			<option value="70">LightSalmon</option>
+			<option value="71">LightSeaGreen</option>
+			<option value="72">LightSkyBlue</option>
+			<option value="73">LightSlateGray</option>
+			<option value="74">LightSteelBlue</option>
+			<option value="75">LightYellow</option>
+			<option value="76">Lime</option>
+			<option value="77">LimeGreen</option>
+			<option value="78">Linen</option>
+			<option value="79">Magenta</option>
+			<option value="80">Maroon</option>
+			<option value="81">MediumAquaMarine</option>
+			<option value="82">MediumBlue</option>
+			<option value="83">MediumOrchid</option>
+			<option value="84">MediumPurple</option>
+			<option value="85">MediumSeaGreen</option>
+			<option value="86">MediumSlateBlue</option>
+			<option value="87">MediumSpringGreen</option>
+			<option value="88">MediumTurquoise</option>
+			<option value="89">MediumVioletRed</option>
+			<option value="90">MidnightBlue</option>
+			<option value="91">MintCream</option>
+			<option value="92">MistyRose</option>
+			<option value="93">Moccasin</option>
+			<option value="94">NavajoWhite</option>
+			<option value="95">Navy</option>
+			<option value="96">OldLace</option>
+			<option value="97">Olive</option>
+			<option value="98">OliveDrab</option>
+			<option value="99">Orange</option>
+			<option value="100">OrangeRed</option>
+			<option value="101">Orchid</option>
+			<option value="102">PaleGoldenRod</option>
+			<option value="103">PaleGreen</option>
+			<option value="104">PaleTurquoise</option>
+			<option value="105">PaleVioletRed</option>
+			<option value="106">PapayaWhip</option>
+			<option value="107">PeachPuff</option>
+			<option value="108">Peru</option>
+			<option value="109">Pink</option>
+			<option value="110">Plum</option>
+			<option value="111">PowderBlue</option>
+			<option value="112">Purple</option>
+			<option value="113">Red</option>
+			<option value="114">RosyBrown</option>
+			<option value="115">RoyalBlue</option>
+			<option value="116">SaddleBrown</option>
+			<option value="117">Salmon</option>
+			<option value="118">SandyBrown</option>
+			<option value="119">SeaGreen</option>
+			<option value="120">SeaShell</option>
+			<option value="121">Sienna</option>
+			<option value="122">Silver</option>
+			<option value="123">SkyBlue</option>
+			<option value="124">SlateBlue</option>
+			<option value="125">SlateGray</option>
+			<option value="126">Snow</option>
+			<option value="127">SpringGreen</option>
+			<option value="128">SteelBlue</option>
+			<option value="129">Tan</option>
+			<option value="130">Teal</option>
+			<option value="131">Thistle</option>
+			<option value="132">Tomato</option>
+			<option value="133">Turquoise</option>
+			<option value="134">Violet</option>
+			<option value="135">Wheat</option>
+			<option value="136">White</option>
+			<option value="137">WhiteSmoke</option>
+			<option value="138">Yellow</option>
+			<option value="139">YellowGreen</option>
+		</field>
+      </fieldset>
+      <fieldset name="sliders" description="Setting for all item,Click Add New(require fill title)" label="Setting Item">
+        <field type="sliders" name="sliders" />
+      </fieldset>
+	  <fieldset name="animation">
+        <field type="animation" name="animation" />
+		<field type="loader" />
+		<field name="font_size_title" type="text" default="24" label="Font size title" description="Font size without px" />
+		<field name="font_weight_title" type="list" default="normal" label="Font weight title" description="Select Normal/Bold">
+			<option value="normal">Normal</option>
+			<option value="bold">Bold</option>
+		</field>
+		<field name="color_title" type="hotcolor" default="#171717" label="Color title" description="Color of Title text" />
+	
+		<field name="show_des" type="list" default="1" label="Show description" description="Select Yes/No">
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+		</field>
+		<field name="font_size_des" type="text" default="14" label="Font size description" description="Font size without px" />
+		<field name="font_weight_des" type="list" default="bold" label="Font weight description" description="Select Normal/Bold">
+			<option value="normal">Normal</option>
+			<option value="bold">Bold</option>
+		</field>
+		<field name="color_des" type="hotcolor" default="#171717" label="Color description text" description="Color of Description text" />
+	
+		<field name="show_readmore" type="list" default="1" label="Show Read more" description="Select Yes/No">
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+		</field>
+		<field name="readmore_text" type="text" default="More" label="Read more text" description="read more text" />	
+		<field name="font_size_readmore" type="text" default="12" label="Font size readmore" description="Font size without px" />	
+		<field name="font_size_readmoreinfo" type="text" default="10" label="Font size readmoreinfo" description="Font size without px" />	
+		<field name="color_readmore" type="list" default="0" label="Color of readmore" description="Select color">
+			<option value="0">AliceBlue</option>
+			<option value="1">AntiqueWhite</option>
+			<option value="2">Aqua</option>
+			<option value="3">Aquamarine</option>
+			<option value="4">Azure</option>
+			<option value="5">Beige</option>
+			<option value="6">Bisque</option>
+			<option value="7">Black</option>
+			<option value="8">BlanchedAlmond</option>
+			<option value="9">Blue</option>
+			<option value="10">BlueViolet</option>
+			<option value="11">Brown</option>
+			<option value="12">BurlyWood</option>
+			<option value="13">CadetBlue</option>
+			<option value="14">Chartreuse</option>
+			<option value="15">Chocolate</option>
+			<option value="16">Coral</option>
+			<option value="17">CornflowerBlue</option>
+			<option value="18">Cornsilk</option>
+			<option value="19">Crimson</option>
+			<option value="20">Cyan</option>
+			<option value="21">DarkBlue</option>
+			<option value="22">DarkCyan</option>
+			<option value="23">DarkGoldenRod</option>
+			<option value="24">DarkGray</option>
+			<option value="25">DarkGreen</option>
+			<option value="26">DarkKhaki</option>
+			<option value="27">DarkMagenta</option>
+			<option value="28">DarkOliveGreen</option>
+			<option value="29">DarkOrange</option>
+			<option value="30">DarkOrchid</option>
+			<option value="31">DarkRed</option>
+			<option value="32">DarkSalmon</option>
+			<option value="33">DarkSeaGreen</option>
+			<option value="34">DarkSlateBlue</option>
+			<option value="35">DarkSlateGray</option>
+			<option value="36">DarkTurquoise</option>
+			<option value="37">DarkViolet</option>
+			<option value="38">DeepPink</option>
+			<option value="39">DeepSkyBlue</option>
+			<option value="40">DimGray</option>
+			<option value="41">DodgerBlue</option>
+			<option value="42">FireBrick</option>
+			<option value="43">FloralWhite</option>
+			<option value="44">ForestGreen</option>
+			<option value="45">Fuchsia</option>
+			<option value="46">Gainsboro</option>
+			<option value="47">GhostWhite</option>
+			<option value="48">Gold</option>
+			<option value="49">GoldenRod</option>
+			<option value="50">Gray</option>
+			<option value="51">Green</option>
+			<option value="52">GreenYellow</option>
+			<option value="53">HoneyDew</option>
+			<option value="54">HotPink</option>
+			<option value="55">IndianRed</option>
+			<option value="56">Indigo</option>
+			<option value="57">Ivory</option>
+			<option value="58">Khaki</option>
+			<option value="59">Lavender</option>
+			<option value="60">LavenderBlush</option>
+			<option value="61">LawnGreen</option>
+			<option value="62">LemonChiffon</option>
+			<option value="63">LightBlue</option>
+			<option value="64">LightCoral</option>
+			<option value="65">LightCyan</option>
+			<option value="66">LightGoldenRodYellow</option>
+			<option value="67">LightGray</option>
+			<option value="68">LightGreen</option>
+			<option value="69">LightPink</option>
+			<option value="70">LightSalmon</option>
+			<option value="71">LightSeaGreen</option>
+			<option value="72">LightSkyBlue</option>
+			<option value="73">LightSlateGray</option>
+			<option value="74">LightSteelBlue</option>
+			<option value="75">LightYellow</option>
+			<option value="76">Lime</option>
+			<option value="77">LimeGreen</option>
+			<option value="78">Linen</option>
+			<option value="79">Magenta</option>
+			<option value="80">Maroon</option>
+			<option value="81">MediumAquaMarine</option>
+			<option value="82">MediumBlue</option>
+			<option value="83">MediumOrchid</option>
+			<option value="84">MediumPurple</option>
+			<option value="85">MediumSeaGreen</option>
+			<option value="86">MediumSlateBlue</option>
+			<option value="87">MediumSpringGreen</option>
+			<option value="88">MediumTurquoise</option>
+			<option value="89">MediumVioletRed</option>
+			<option value="90">MidnightBlue</option>
+			<option value="91">MintCream</option>
+			<option value="92">MistyRose</option>
+			<option value="93">Moccasin</option>
+			<option value="94">NavajoWhite</option>
+			<option value="95">Navy</option>
+			<option value="96">OldLace</option>
+			<option value="97">Olive</option>
+			<option value="98">OliveDrab</option>
+			<option value="99">Orange</option>
+			<option value="100">OrangeRed</option>
+			<option value="101">Orchid</option>
+			<option value="102">PaleGoldenRod</option>
+			<option value="103">PaleGreen</option>
+			<option value="104">PaleTurquoise</option>
+			<option value="105">PaleVioletRed</option>
+			<option value="106">PapayaWhip</option>
+			<option value="107">PeachPuff</option>
+			<option value="108">Peru</option>
+			<option value="109">Pink</option>
+			<option value="110">Plum</option>
+			<option value="111">PowderBlue</option>
+			<option value="112">Purple</option>
+			<option value="113">Red</option>
+			<option value="114">RosyBrown</option>
+			<option value="115">RoyalBlue</option>
+			<option value="116">SaddleBrown</option>
+			<option value="117">Salmon</option>
+			<option value="118">SandyBrown</option>
+			<option value="119">SeaGreen</option>
+			<option value="120">SeaShell</option>
+			<option value="121">Sienna</option>
+			<option value="122">Silver</option>
+			<option value="123">SkyBlue</option>
+			<option value="124">SlateBlue</option>
+			<option value="125">SlateGray</option>
+			<option value="126">Snow</option>
+			<option value="127">SpringGreen</option>
+			<option value="128">SteelBlue</option>
+			<option value="129">Tan</option>
+			<option value="130">Teal</option>
+			<option value="131">Thistle</option>
+			<option value="132">Tomato</option>
+			<option value="133">Turquoise</option>
+			<option value="134">Violet</option>
+			<option value="135">Wheat</option>
+			<option value="136">White</option>
+			<option value="137">WhiteSmoke</option>
+			<option value="138">Yellow</option>
+			<option value="139">YellowGreen</option>
+		</field>
+		<field name="bottom_item_res" type="text" default="155" label="Bottom when responsive" description="Bottom without px" />
+      </fieldset>
+      <fieldset name="advanced">	  
+		<field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+		<field name="module_cache" type="list" default="1" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+		<option value="1">JGLOBAL_USE_GLOBAL</option>
+		<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+		</field>
+		<field name="cache" type="hidden" default="1" />
+		<field name="cache_time" type="text" default="900" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+		<field name="cachemode" type="hidden" default="itemid">
+			<option value="itemid"></option>
+		</field>
+      </fieldset>
+    </fields>
+  </config>
+</extension>

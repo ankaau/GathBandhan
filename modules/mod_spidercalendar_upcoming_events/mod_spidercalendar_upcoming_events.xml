@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<extension type="module" version="2.5.9" client="site" method="upgrade">
+
+  <name>Upcoming Events</name>
+<creationDate>November 2013</creationDate>
+	<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+	<author>Web Dorado</author>
+	<copyright>Copyright (C) 2011 Web-Dorado. All rights reserved.</copyright> 
+	<authorEmail>info@web-dorado.com</authorEmail>
+	<authorUrl>http://web-dorado.com/</authorUrl>
+    <version>3.2.11</version>
+ 
+  <files>
+
+   <filename module="mod_spidercalendar_upcoming_events">mod_spidercalendar_upcoming_events.php</filename>
+	<filename>index.html</filename>
+	<folder>elements</folder>
+   <folder>images</folder>
+
+  </files>
+<config>
+  <fields name="params">
+
+
+  	<fieldset name="basic" label="Module Parameters">
+		<field  type="buycommercialtext" default=""  addfieldpath="/modules/mod_spidercalendar_upcoming_events/elements/" name="buycommercialtext" label="" description=""/>
+
+	<field  type="calendarselect"  addfieldpath="/modules/mod_spidercalendar_upcoming_events/elements/"  label="Select Calendar" name="calendar_select" description="" required="required"/>
+    <field  type="eventtype"   addfieldpath="/modules/mod_spidercalendar_upcoming_events/elements/" label="Events to display:" name="event_type" description="" />
+	<field  type="eventfromcurrentd"  addfieldpath="/modules/mod_spidercalendar_upcoming_events/elements/" name="event_from_current_day" label=" Events Quantity " description="" default="1" />
+    <field  type="eventfromdinterval"  addfieldpath="/modules/mod_spidercalendar_upcoming_events/elements/" label="Strating From:" name="event_from_day_interval" description="" />
+	
+    <field type="currentfolldays" name="since" label="Following Days Quantity " description="" default="10"  />
+	<field type="currentev" name="count" label=" Events Quantity " description=""  default="1" />
+	<field type="currentorder" name="ordering" default="0" label="Ordering" description="" />
+	
+	
+	<field type="startcalendar" name="start_day_calendar"  label="Select Start Date" description="" default="2013-04-17"  />
+	<field type="startfolldays" name="since1" label="Following Days Quantity" description="" default="10" />
+	<field type="startev" name="count1" label=" Events Quantity" description=""  default="1" />
+	<field type="startorder" name="ordering1" default="0" label="Ordering" description=""  />
+	<field  type="eventselect" default=""  addfieldpath="/modules/mod_spidercalendar_upcoming_events/elements/" name="event_select" label="Select Events From List" description=""/>
+    <field type="spacer" name="myspacer" hr="true" />
+  
+   <field name="show_time" type="radio" default="1" label="Show Event Date" description="">
+            <option value="1" >Yes</option>
+			<option value="0">No</option>
+			
+	</field>
+	
+	<field name="show_repeat" type="radio" default="1" label="Show Event Repeat Rate" description="">
+   <option value="1"> Yes </option>
+   <option value="0" > No </option>
+   </field>
+	 
+	 <field name="show_eventtext" type="radio" default="1" label="Show Event Text" description="">
+	        <option value="1" >Yes</option>  
+			<option value="0">No</option>
+			
+	</field>
+   <field name="show_numbering" type="radio" default="1" label="Show Numbering" description="">
+	        <option value="1" >Yes</option>
+			<option value="0">No</option>
+			
+	</field>
+     
+   
+     </fieldset>
+	 
+	 
+    <fieldset name="themes" label="Module Themes">
+
+	<field  type="buycommercial" default=""  addfieldpath="/modules/mod_spidercalendar_upcoming_events/elements/" name="buycommercial" label="" description=""/>
+
+   
+		
+		</fieldset>
+		
+
+		</fields>
+		</config>
+
+</extension>

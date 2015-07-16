@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<extension
+	type="module"
+	version="3.0.0"
+	client="site"
+	method="upgrade">
+    <name>IceCarosuel Module</name>
+    <creationDate>May 2013</creationDate>
+    <author>IceTheme</author>
+    <copyright>GNU / GPL</copyright>
+    <authorEmail>info@icetheme.com</authorEmail>
+    <authorUrl>http://www.icetheme.com</authorUrl>
+    <version>3.0.0</version>
+
+	<description>
+	<![CDATA[
+	<p class="alert alert-info">The finest way to display a large set of items in a nice scrolling way. The module is responsive as well.</p>
+	<ul class="nav nav-tabs nav-stacked">
+		<li><a target="_blank" href="http://www.icetheme.com/joomla-extensions/icecarousel">IceCarousel Page</a></li>
+		<li><a target="_blank" href="http://demo.icetheme.com/extensions30">View Demo</a></li>
+		<li><a target="_blank" href="http://icetheme.com/forums">Get Support</a></li>
+	</ul>]]>
+	</description>
+	
+     <files>
+        <filename module="mod_ice_carousel">mod_ice_carousel.php</filename>
+        <filename module="mod_ice_carousel">helper.php</filename>
+		<filename module="mod_ice_carousel">index.html</filename>
+		<filename module="mod_ice_carousel">CHANGELOG.php</filename>
+		<filename module="mod_ice_carousel">LICENSE.php</filename>
+        <folder module="mod_ice_carousel">libs</folder>
+		<folder module="mod_ice_carousel">assets</folder>
+        <folder module="mod_ice_carousel">tmpl</folder>
+		<folder module="mod_ice_carousel">themes</folder>
+    </files>
+	
+	<languages>
+		<language tag="en-GB">languages/en-GB/en-GB.mod_ice_carousel.ini</language>
+	</languages>
+	
+	<config>
+    <fields 
+		name="params"
+		addfieldpath="/modules/mod_ice_carousel/libs/elements">
+		<fieldset 
+			name="basic">
+			<field 
+				name="theme" 
+				type="folderlist"
+				directory="modules/mod_ice_carousel/themes/" 
+				default="- Use Default -"
+				label="ICE_CAROUSEL_THEME_LABEL" 
+				description="ICE_CAROUSEL_THEME_DESC">
+			</field>
+			
+		    <field name="" type="spacer" default="" label="" description="" />
+			<field 
+				name="item_width" 
+				type="text" 
+				default="240" 
+				label="ICE_CAROUSEL_ITEMWIDTH_LABEL" 
+				description="ICE_CAROUSEL_ITEMWIDTH_DESC">
+			</field>
+			
+			<field name="" type="spacer" default="" label="" description="" />
+
+			<field 
+			name="auto_renderthumb" 
+			type="radio" 
+			class="btn-group"
+			default="1" 
+			label="ICE_CAROUSEL_RENDERTHUMB_LABEL" 
+			description="ICE_CAROUSEL_RENDERTHUMB_DESC">
+			  <option value="1">YES</option>
+			  <option value="0">NO</option>
+			</field>
+			
+			<field 
+				name="main_width" 
+				type="text" 
+				default="240" 
+				label="ICE_CAROUSEL_MAIN_WIDTH_LABEL" 
+				description="ICE_CAROUSEL_MAIN_WIDTH_DESC">
+			</field>
+			
+			<field 
+				name="main_height" 
+				type="text" 
+				default="160" 
+				label="ICE_CAROUSEL_MAIN_HEIGHT_LABEL" 
+				description="ICE_CAROUSEL_MAIN_HEIGHT_DESC">
+			</field>
+					
+			<field 
+				name="image_quanlity" 
+				type="text" 
+				default="75" 
+				label="ICE_CAROUSEL_IMAGE_QUANLITY_LABEL" 
+				description="ICE_CAROUSEL_IMAGE_QUANLITY_DESC" />		
+			
+			
+			
+			<field name="" type="spacer" default="" label="" description="" />
+			
+				<field 
+				name="Data Source" 
+				type="list"
+				default="content" 
+				title="ICE_CAROUSEL_SOURCE" 
+				description="ICE_CAROUSEL_SOURCE_DESC">
+					<option value="content">Content</option>
+				</field>
+		
+		</fieldset>		
+			
+		<fieldset name="content" label="ICE_CAROUSEL_MOD_CAROSUEL_FIELD_GROUP_CONTENT_LABEL">
+			
+			<field
+					name="source_from"
+					type="list"
+					class="btn-group"
+					default="catid"
+					label="ICE_CAROUSEL_SOURCE_FROM"
+					description="ICE_CAROUSEL_SOURCE_FROM_DESC">
+						<option value="catid">Category</option>
+						<option value="article_id">Articles ID</option>
+				</field>
+				
+				<field
+					name="catid"
+					type="category"
+					extension="com_content"
+					multiple="true"
+					default=""
+					size="10"
+					label="ICE_CAROUSEL_JCATEGORY_LABEL"
+					description="ICE_CAROUSEL_MOD_CATEGORY_DESC" >
+					<option value="">ICE_CAROUSEL_JOPTION_ALL_CATEGORIES</option>
+				</field>
+				
+				<field name="article_id"
+					type="text"
+					size="45"
+					label="ICE_CAROUSEL_ARTICLES_ID_LABEL"
+					description="ICE_CAROUSEL_ARTICLES_ID_DESC"/>
+				
+				
+				<field
+					name="ordering"
+					type="list"
+					default="a.publish_up"
+					label="ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_LABEL"
+					description="ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_DESC">
+					
+					<option
+						value="a.ordering__ASC">ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_ORDERING_ASC</option>
+					<option
+						value="a.ordering__DESC">ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_ORDERING_DESC</option>
+					<option
+						value="a.created__ASC">ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_CREATED_DATE_ASC</option>
+					<option
+						value="a.created__DESC">ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_CREATED_DATE_DESC</option>
+					<option
+						value="a.hits__ASC">ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_HITS_ASC</option>
+					<option
+						value="a.hits__DESC">ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_HITS_DESC</option>
+					<option
+						value="rand()">ICE_CAROUSEL_MOD_ARTICLES_NEWS_FIELD_ORDERING_RANDOM</option>
+				</field>
+
+		</fieldset>
+		
+		
+		<fieldset name="ITEM_OPTIONS" label="ITEM_OPTIONS"> 
+			
+				<field 
+					name="limit_items" 
+					type="text" 
+					default="8" 
+					label="ICE_CAROUSEL_LIMIT_ITEMS" 
+					description="ICE_CAROUSEL_LIMIT_ITEMS_DESC" />
+					
+				
+				<field name="" type="spacer" default="" label="" description="" />	
+					
+				<field name="direction_arrow" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="ICE_CAROUSEL_DISPLAY_ARROWS_LABEL" 
+					description="ICE_CAROUSEL_DISPLAY_ARROWS_DESC">
+						<option value="1">ICE_CAROUSEL_JYES</option>
+						<option value="0">ICE_CAROUSEL_JNO</option>
+				</field>
+				
+				<field name="nav_bullets" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="ICE_CAROUSEL_DISPLAY_BULLETS_LABEL" 
+					description="ICE_CAROUSEL_DISPLAY_BULLETS_DESC">
+						<option value="1">ICE_CAROUSEL_JYES</option>
+						<option value="0">ICE_CAROUSEL_JNO</option>
+				</field>
+				
+				<field name="display_caption" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="ICE_CAROUSEL_DISPLAY_CAPTION_LABEL" 
+					description="ICE_CAROUSEL_DISPLAY_CAPTION_DESC">
+						<option value="1">ICE_CAROUSEL_JYES</option>
+						<option value="0">ICE_CAROUSEL_JNO</option>
+				</field>	
+
+
+				<field name="" type="spacer" default="" label="" description="" />	
+				
+			
+				<field 
+					name="auto_start"
+					type="radio" 
+					class="btn-group" 
+					default="0"
+					label="ICE_CAROUSEL_AUTO_START_LABEL"
+					description="ICE_CAROUSEL_AUTO_START_DESC">
+						<option value="1">ICE_CAROUSEL_JYES</option>
+						<option value="0">ICE_CAROUSEL_JNO</option>
+				</field>
+									
+				<field
+					name="slideshowspeed"
+					type="text" 
+					default="5000" 
+					label="ICE_CAROUSEL_SLIDESHOWSPEED_LABEL" 
+					description="ICE_CAROUSEL_SLIDESHOWSPEED_DESC" />
+				
+				
+				
+				<field
+					name="animationspeed"
+					type="text" 
+					default="600" 
+					label="ICE_CAROUSEL_ANIMATIONSPEED_LABEL" 
+					description="CE_CAROUSEL_ANIMATIONSPEED_DESC" />
+					
+				
+				<field name="" type="spacer" default="" label="" description="" />
+				
+				<field name="show_title" 
+					type="radio"
+					class="btn-group"
+					default="1" 
+					label="ICE_CAROUSEL_SHOWTITLE" 
+					description="ICE_CAROUSEL_SHOWTITLE_DESC">
+						<option value="1">ICE_CAROUSEL_JYES</option>
+						<option value="0">ICE_CAROUSEL_JNO</option>
+				</field>
+					
+				<field 
+					name="title_max_chars" 
+					type="text" 
+					default="100" 
+					label="ICE_CAROUSEL_TITLE_MAX_CHARS_LABEL" 
+					description="ICE_CAROUSEL_TITLE_MAX_CHARS_DESC" />
+					
+				<field name="show_description" 
+					type="radio"
+					class="btn-group"
+					default="1" 
+					label="ICE_CAROUSEL_SHOWDESCRIPTION" 
+					description="ICE_CAROUSEL_SHOWDESCRIPTION_DESC">
+						<option value="1">ICE_CAROUSEL_JYES</option>
+						<option value="0">ICE_CAROUSEL_JNO</option>
+				</field>
+									
+				<field 
+					name="description_max_chars" 
+					type="text" 
+					default="100" 
+					label="ICE_CAROUSEL_DESCIPTION_MAX_CHARS_LABEL" 
+					description="ICE_CAROUSEL_DESCIPTION_MAX_CHARS_DESC" />
+					
+				<field name="strip_tags" type="radio" class="btn-group" default="1" label="ICE_CAROUSEL_STRIP_TAGS_LABEL" description="ICE_CAROUSEL_STRIP_TAGS_DESC">
+					<option value="1">ICE_CAROUSEL_JYES</option>
+					<option value="0">ICE_CAROUSEL_JNO</option>
+				</field>
+					
+				<field
+					name="link_titles"
+					type="radio"
+					default="1" 
+					label="ICE_CAROUSEL_REAMORE_SHOW_LABEL"
+					class="btn-group"
+					description="ICE_CAROUSEL_REAMORE_SHOW_DESC">
+					<option
+						value="1">ICE_CAROUSEL_JYES</option>
+					<option
+						value="0">ICE_CAROUSEL_JNO</option>
+				</field>
+					
+				<field 
+					name="istruncate" 
+					type="radio" 
+					class="btn-group" 
+					default="0" 
+					label="Show readmore 3 dots?" 
+					description="In case you have put max chars on the 2 above paramters we reccomend that you enable this paramter to make the paragraph look continues">
+					<option value="1">Yes</option>
+					<option value="0">No</option>
+				</field>
+						
+		</fieldset>
+		<fieldset 
+			name="advanced">
+			<field 
+				name="moduleclass_sfx" 
+				type="text" 
+				default="" 
+				label="ICE_CAROUSEL_MODULE_CLASS_SUFFIX_LABEL" 
+				description="ICE_CAROUSEL_PARAMMODULECLASSSUFFIX_DESC" />	
+				
+			<field name="" type="spacer" default="" label="" description="" />
+
+			<field 
+				name="enable_cache"
+				type="list" 
+				default="0" 
+				label="ICE_CAROUSEL_CACHING_LABEL" 
+				description="ICE_CAROUSEL_CACHING_DESC">
+					<option value="1">Use Cache Data</option>
+					<option value="0">Don't cache</option>
+				</field>
+				<field 
+					name="cache_time" 
+					type="text" 
+					default="15" 
+					label="ICE_CAROUSEL_CACHE_TIME_LABEL"
+					description="ICE_CAROUSEL_CACHE_TIME_DESC" />
+			<field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />
+		</fieldset>
+
+	</fields>
+	
+	</config>	
+</extension>

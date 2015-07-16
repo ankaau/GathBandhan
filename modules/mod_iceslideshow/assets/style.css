@@ -1,0 +1,50 @@
+/*---------------------------------------------------------------- 
+  Copyright:
+  Copyright (C) 2008 - 2013 IceTheme. All Rights Reserved
+  
+  License:
+  GNU General Public License version 2 
+  
+  Author:
+  IceTheme - http://wwww.icetheme.com
+---------------------------------------------------------------- */
+
+
+
+/* Caption  */
+.iceslideshow .carousel-caption{
+	padding:10px 15px;}
+
+	.iceslideshow .carousel-caption a {}
+		.iceslideshow .carousel-caption a:hover {}
+		
+		
+	.carousel-caption .mod-description p {
+		color:#ccc;
+		color:rgba(255,255,255,.7);}
+		
+
+
+
+/* Vertical mode */
+.carousel.vertical .item {
+	left: 0;
+	-webkit-transition: 0.6s ease-in-out top;
+	-moz-transition: 0.6s ease-in-out top;
+	-ms-transition: 0.6s ease-in-out top;
+	-o-transition: 0.6s ease-in-out top;
+	transition: 0.6s ease-in-out top;}
+
+	.carousel.vertical .active { top: 0;}
+		
+		.carousel.vertical .active.left { top: -100%;}
+		.carousel.vertical .active.right { top: 100%;}
+
+	.carousel.vertical .next { top: 100%;}
+	.carousel.vertical .prev { top: -100%;}
+	
+		.carousel.vertical .next.left,
+		.carousel.vertical .prev.right { top: 0;}
+		
+	
+	

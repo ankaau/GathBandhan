@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config
+	name="Sliding text"
+	description="Scalable.">
+	<digit scope="*">
+		<styles>
+			<style name="font-size" unit="px" value="60" scalable="1" />
+			<style name="height" unit="em" value="1" scalable="0" />
+			<style name="width" unit="em" value="0.6" scalable="0" />
+			<style name="line-height" unit="em" value="1" />
+		</styles>
+		<modes>
+			<mode name="down">
+				<group duration="300" transition="sine:in">
+					<element 
+						tag="div"
+						content_type="txt"
+						value_type="next">
+						
+						<styles>
+							<width>100%</width>
+							<top>100%</top>
+							<left>0</left>
+							<right>0</right>
+							<margin>0 auto</margin>
+							<text-align>center</text-align>
+						</styles>	
+						<tweens>
+							<top>100,0</top>
+						</tweens>
+					</element>
+					<element 
+						tag="div"
+						content_type="txt"
+						value_type="prev"
+						filename_base="d"
+						filename_ext=".png">
+						
+						<styles>
+							<width>100%</width>
+							<top>0</top>
+							<left>0</left>
+							<right>0</right>
+							<margin>0 auto</margin>
+							<text-align>center</text-align>
+						</styles>	
+						<tweens>
+							<top>0,-100</top>
+						</tweens>
+					</element>
+				</group>
+			</mode>
+			<mode name="up">
+				<group duration="300" transition="sine:in">
+					<element 
+						tag="div"
+						content_type="txt"
+						value_type="next">
+						
+						<styles>
+							<width>100%</width>
+							<top>-100%</top>
+							<left>0</left>
+							<right>0</right>
+							<margin>0 auto</margin>
+							<text-align>center</text-align>
+						</styles>	
+						<tweens>
+							<top>-100,0</top>
+						</tweens>
+					</element>
+					<element 
+						tag="div"
+						content_type="txt"
+						value_type="prev">
+						
+						<styles>
+							<width>100%</width>
+							<top>0</top>
+							<left>0</left>
+							<right>0</right>
+							<margin>0 auto</margin>
+							<text-align>center</text-align>
+						</styles>		
+						<tweens>
+							<top>0,100</top>
+						</tweens>
+					</element>
+				</group>
+			</mode>
+		</modes>
+	</digit>
+</config>

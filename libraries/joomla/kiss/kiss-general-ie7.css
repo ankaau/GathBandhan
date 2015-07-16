@@ -1,0 +1,15 @@
+/* KISS additional style sheet for other than mozilla browsers*/
+
+/* KISS Bar Style */
+p.bar-1 {
+  border           : 1px;
+  border-style	   : outset;
+  border-color     : #e7e7e7;
+  margin-top       : 0px;
+  height	   : 30px;
+  padding          : 3px 3px 0px 2px !important;
+  color            : #666666;
+  background-image : url(images/bg-gradient-silver.png);
+  vertical-align   : middle;
+}
+

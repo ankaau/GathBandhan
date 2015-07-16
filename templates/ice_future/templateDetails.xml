@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/2.5/template-install.dtd">
+<extension version="3.0" type="template" client="site">
+	<name>ice_future</name>
+	<version>1.0</version>
+	<creationDate>10/31/2012</creationDate>
+	<author>IceTheme</author>
+	<authorEmail>support@icetheme.com</authorEmail>
+	<copyright>Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.</copyright>
+	
+	<description>
+	<![CDATA[
+	<p class="alert alert-info lead">Our first Joomla 3.0 template, Ice Future, is released for FREE. You are welcome to use it on any project, commercial or not.</p>
+	<ul class="nav nav-tabs nav-stacked">
+		<li><a target="_blank" href="http://www.icetheme.com/themes/it-future">Template Page</a></li>
+		<li><a target="_blank" href="http://demo.icetheme.com/?template=it_future">View Demo</a></li>
+		<li><a target="_blank" href="http://icetheme.com/forums">Get Support</a></li>
+	</ul>]]>
+	</description>
+	
+	<files>
+		<filename>component.php</filename>
+		<filename>favicon.ico</filename>
+		<filename>error.php</filename>
+		<filename>offline.php</filename>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+		<folder>css</folder>
+		<folder>html</folder>
+		<folder>images</folder>
+		<folder>icetools</folder>
+		<folder>js</folder>
+	</files>
+	<positions>
+		<position>debug</position>
+		<position>mainmenu</position>
+		<position>copyrightmenu</position>
+		<position>breadcrumbs</position>
+		<position>left</position>
+		<position>right</position>
+		<position>search</position>
+		<position>promo1</position>
+		<position>promo2</position>
+		<position>promo3</position>
+		<position>promo4</position>
+		<position>footer</position>
+		<position>footer1</position>
+		<position>footer2</position>
+		<position>footer3</position>
+		<position>footer4</position>
+		<position>marketing</position>
+		<position>icecarousel</position>
+	</positions>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_ice_future.ini</language>
+		<language tag="en-GB">en-GB/en-GB.tpl_ice_future.sys.ini</language>
+	</languages>
+	<config>
+	
+		<fields name="params">
+		
+			<fieldset name="basic">
+			
+				 <field name="TemplateStyle" class="lof_box" type="list" default="style1" intro="This Joomla template is built-in with an amazing set of 4 different stylish color variations. You can easily change the template style on the Template Manager in J! Administrator. Also your users can have a option to change the style on the fly through our template style-changer." label="TPL_FIELD_TEMPLATESTYLE_LABEL"  description="TPL_FIELD_TEMPLATESTYLE_DESC">
+					<option value="style1">TPL_FIELD_TEMPLATESTYLE_STYLE1</option>
+					<option value="style2">TPL_FIELD_TEMPLATESTYLE_STYLE2</option>
+					<option value="style3">TPL_FIELD_TEMPLATESTYLE_STYLE3</option>
+					<option value="style4">TPL_FIELD_TEMPLATESTYLE_STYLE4</option>	
+					<option value="style5">TPL_FIELD_TEMPLATESTYLE_STYLE5</option>
+					<option value="style6">TPL_FIELD_TEMPLATESTYLE_STYLE6</option>
+				</field>	
+				
+				<field name="styleswitcher" type="radio"  class="btn-group" default="1" label="TPL_FIELD_STYLESWITCHER_LABEL"  description="TPL_FIELD_STYLESWITCHER_DESC" filter="int">
+					<option value="0">TPL_FIELD_NO</option>
+					<option value="1">TPL_FIELD_YES</option>
+				</field>	
+					
+                <field name="logo" type="media" default="" label="TPL_FIELD_LOGO_LABEL" description="TPL_FIELD_LOGO_DESC" />	
+				
+			<field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />	
+			
+
+			
+				 <field name="go2top" type="radio"  class="btn-group" default="1" label="TPL_FIELD_GOTOP_LABEL"  description="TPL_FIELD_GOTOP_DESC" filter="int">
+                    <option value="0">TPL_FIELD_NO</option>
+                    <option value="1">TPL_FIELD_YES</option>
+                </field>			
+				 <field name="responsive_template" type="radio"  class="btn-group" default="1" label="TPL_FIELD_RESPONSIVE_LABEL"  description="TPL_FIELD_RESPONSIVE_LABEL_DESC" filter="int">
+                    <option value="0">TPL_FIELD_NO</option>
+                    <option value="1">TPL_FIELD_YES</option>
+                </field>
+				
+			<field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />	
+			
+				 <field name="social_fb" type="radio" default="1"  class="btn-group" label="TPL_FIELD_SOCIAL_FB_LABEL"  description="TPL_FIELD_SOCIAL_FB_DESC" filter="int">
+                    <option value="0">TPL_FIELD_NO</option>
+                    <option value="1">TPL_FIELD_YES</option>
+                </field>
+				
+				<field name="social_fb_user" type="text" default="icetheme" label="TPL_FIELD_FACEBOOK_LABEL" description="TPL_FIELD_FACEBOOK_DESC"/>
+				
+				 <field name="social_tw" type="radio" default="1" class="btn-group" label="TPL_FIELD_SOCIAL_TW_LABEL"  description="TPL_FIELD_SOCIAL_TW_DESC" filter="int">
+                    <option value="0">TPL_FIELD_NO</option>
+                    <option value="1">TPL_FIELD_YES</option>
+                </field>
+				
+				<field name="social_tw_user" type="text" default="icetheme" label="TPL_FIELD_TWITTER_LABEL" description="TPL_FIELD_TWITTER_DESC"/>
+				
+					
+				 <field name="icelogo" type="radio" default="1" class="btn-group" label="TPL_FIELD_ICELOGO_LABEL"  description="TPL_FIELD_ICELOGO_DESC" filter="int">
+                    <option value="0">TPL_FIELD_NO</option>
+                    <option value="1">TPL_FIELD_YES</option>
+                </field>	
+			
+			</fieldset>
+			
+			
+		</fields>
+	</config>
+</extension>

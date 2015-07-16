@@ -1,0 +1,92 @@
+/*---------------------------------------------------------------- 
+  Copyright:
+  Copyright (C) 2008 - 2013 IceTheme. All Rights Reserved
+  
+  License:
+  GNU General Public License version 2 
+  
+  Author:
+  IceTheme - http://wwww.icetheme.com
+---------------------------------------------------------------- */
+
+.icecarousel {
+	background:none;
+	box-shadow:none;
+	border:none;
+	border-radius:0;
+	margin:0 -10px 60px;
+	}
+	
+	.icecarousel .icecarousel-inner { 
+		margin:0 10px;
+		padding:9px;
+		background-color: #f1f1f2;
+		border: 1px solid #e3e3e5;
+		-webkit-transition: all 0.2s ease-out;
+		-moz-transition: all 0.2s ease-out;
+		-o-transition: all 0.2s ease-out;
+		transition: all 0.2s ease-out;
+	}
+	
+	
+	.icecarousel .icecarousel-inner:hover {
+		opacity:1!important;
+	}
+	
+	
+	/* Controls */
+	ol.flex-control-paging {
+		bottom: -60px;
+		height: 60px;
+		line-height: 80px;	
+	}
+		ol.flex-control-paging li {
+			margin: 0 4px;
+		}
+			
+			ol.flex-control-paging li a {
+				width: 12px;
+				height: 12px;
+				background: #BFBFBF;
+				box-shadow:none;	
+			}
+		
+				.flex-control-paging li a.flex-active {
+					background: #444;
+				}
+
+
+	/* Direction Nav */
+	ul.flex-direction-nav {
+	}
+		
+		ul.flex-direction-nav li {
+		}
+			
+			ul.flex-direction-nav li a {
+				top:auto;
+				bottom:-65px;
+				width: 45px;
+				height: 60px;
+				background-image: url(images/arrows.png);
+			}
+			
+			ul.flex-direction-nav li a.flex-next {
+				background-position: 0 100%;
+			}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

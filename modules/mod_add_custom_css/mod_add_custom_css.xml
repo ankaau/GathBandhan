@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.7.0" client="site" method="upgrade">
+	<name>Add Custom CSS</name>
+	<author>Impression eStudio</author>
+	<creationDate>2013-07-01</creationDate>
+	<copyright>All rights reserved by Impression eStudio 2013.</copyright>
+	<license>GPL 2.0</license>
+	<authorEmail>info@impression-estudio.gr</authorEmail>
+	<authorUrl>www.impression-estudio.gr</authorUrl>
+	<version>1.1.1</version>
+	<description><![CDATA[<p>Load your custom CSS file after the CSS files of the template and the modules.</p>]]></description>
+	<files>
+		<filename module="mod_add_custom_css">mod_add_custom_css.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_add_custom_css.xml</filename>
+		<folder>includes</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.mod_add_custom_css.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="/modules/mod_add_custom_css/includes/admin">
+			<fieldset name="basic">
+				<field name="spacer_info" type="spacerinfo" default="" label=" " description="" />
+				<field name="custom_css_file_path_1" type="text" default="" label="Custom CSS File Path 1" description="ACC_CUSTOM_CSS_FILE_PATH_1_DESCRIPTION"/>
+				<field name="custom_css_file_path_2" type="text" default="" label="Custom CSS File Path 2" description="ACC_CUSTOM_CSS_FILE_PATH_2_DESCRIPTION"/>
+				<field name="custom_css_file_path_3" type="text" default="" label="Custom CSS File Path 3" description="ACC_CUSTOM_CSS_FILE_PATH_3_DESCRIPTION"/>
+				<field name="remove_comments" type="checkbox" label="Remove Comments" description="ACC_REMOVE_COMMENTS_DESCRIPTION" value="1" default="0" />
+				<field name="minimize" type="checkbox" label="Minimize" description="ACC_MINIMIZE_DESCRIPTION" value="1" default="0" />
+				<field name="full_absolute_paths" type="checkbox" label="Full Absolute Paths" description="ACC_FULL_ABSOLUTE_PATHS_DESCRIPTION" value="1" default="0" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

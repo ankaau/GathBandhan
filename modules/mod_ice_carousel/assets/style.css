@@ -1,0 +1,19 @@
+/*---------------------------------------------------------------- 
+  Copyright:
+  Copyright (C) 2008 - 2013 IceTheme. All Rights Reserved
+  
+  License:
+  GNU General Public License version 2 
+  
+  Author:
+  IceTheme - http://wwww.icetheme.com
+---------------------------------------------------------------- */
+
+
+.icecarousel {
+	background:none;
+	box-shadow:none;
+	border:none;
+	border-radius:0;}
+	
+	.icecarousel .icecarousel-inner { padding:0 10px;}

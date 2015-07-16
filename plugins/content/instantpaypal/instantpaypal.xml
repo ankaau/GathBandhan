@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+	<name>Content - InstantPaypal</name>
+	<author>Joomla! Extensions Store</author>
+	<creationDate>March 2013</creationDate>
+	<copyright>Copyright (C) 2013 - Joomla! Extensions Store. All Rights Reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>ecommerce@storejoomla.org</authorEmail>
+	<authorUrl>http://storejoomla.org</authorUrl>
+	<version>1.1.1</version>
+	<description>INSTANTPAYPAL_DESCRIPTION</description>
+	
+	<files>
+		<filename plugin="instantpaypal">instantpaypal.php</filename>
+		<filename>index.html</filename>
+	</files>
+	
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_content_instantpaypal.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_content_instantpaypal.sys.ini</language>
+    </languages>
+    
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="spacer0" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_GENERALSETTINGS" />
+				<field name="button_type" type="list" default="pay" label="PARAM_BUTTON_TYPE" description="PARAM_BUTTON_TYPE_DESC" >
+					<option value="donate">Donate</option>
+					<option value="pay">Pay</option>
+					<option value="_xclick">Buy</option>
+					<option value="fullcart">Full cart</option>
+					<option value="showcart">Show cart</option>
+					<option value="addtocart">Add to cart</option>
+				</field>
+				 
+				<field name="showxtdinfo" class="btn-group" type="radio" default="1" label="PARAM_SHOWXTD_INFO_LABEL" description="PARAM_SHOWXTD_INFO_LABEL_DESC">
+				  <option value="0">JNO</option>
+				  <option value="1">JYES</option>
+				</field>
+				<field name="paypal_email" type="text" size="50" default="" label="PARAM_PAYPALVENDOR_EMAIL_LABEL" description="PARAM_PAYPALVENDOR_EMAIL_DESC" />
+				<field name="currency_code" type="text" default="USD" label="PARAM_CURRENCY_LABEL" description="PARAM_CURRENCY_DESC" />
+				<field name="country_code" type="text" default="US" label="PARAM_COUNTRY_LABEL" description="PARAM_COUNTRY_DESC" />
+				<field name="button_path" type="text" default="en_US" label="PARAM_BUTTON_LABEL" description="PARAM_BUTTON_DESC" />
+				<field name="default_btnsize" class="btn-group" type="radio" default="_SM" label="PARAM_BUTTON_SIZE_LABEL" description="PARAM_BUTTON_SIZE_DESC">
+				  <option value="_LG">Large</option>
+				  <option value="_SM">Small</option>
+				</field>
+				
+				<field name="default_productname" type="text" default="ProductDemo" label="PARAM_DEFAULTPRODUCTNAME_LABEL" description="PARAM_DEFAULTPRODUCTNAME_LABEL_DESC" />
+				<field name="default_price" type="text" default="0" label="PARAM_DEFAULTPRICE_LABEL" description="PARAM_DEFAULTPRICE_LABEL_DESC" />
+				
+				<field name="spacer1" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_TAXSETTINGS" />
+				<field name="global_taxamount" type="text" default="0" label="PARAM_DEFAULTTAXAMOUNT_LABEL" description="PARAM_DEFAULTTAXAMOUNT_LABEL_DESC" />
+				<field name="global_taxtext" type="text" default="Tax +" label="PARAM_DEFAULTTAXTEXT_LABEL" description="PARAM_DEFAULTTAXTEXT_LABEL_DESC" />
+				<field name="global_taxtype" type="list" default="fixed" label="PARAM_DEFAULTTAXTYPE_LABEL" description="PARAM_DEFAULTTAXTYPE_LABEL_DESC" >
+					<option value="fixed">Fixed tax</option>
+					<option value="rate">Rate tax</option>
+			    </field>
+			    
+			    <field name="spacer2" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_SHIPPINGSETTINGS" />
+			  	<field name="global_shippingamount" type="text" default="0" label="PARAM_DEFAULTSHIPPINGAMOUNT_LABEL" description="PARAM_DEFAULTSHIPPINGAMOUNT_LABEL_DESC" />
+				<field name="global_shippingtext" type="text" default="Shipping +" label="PARAM_DEFAULTSHIPPINGTEXT_LABEL" description="PARAM_DEFAULTSHIPPINGTEXT_LABEL_DESC" />
+				<field name="global_shippingtype" type="list" default="single" label="PARAM_DEFAULTSHIPPINGRATE_LABEL" description="PARAM_DEFAULTSHIPPINGRATE_LABEL_DESC" >
+					<option value="single">Single shipping for all products</option>
+					<option value="multiple">Multiple shipping for each products</option>
+			    </field>
+			    <field name="global_unique_shipping" class="btn-group" type="radio" default="1" label="PARAM_UNIQUE_SHIPPING_LABEL" description="PARAM_UNIQUE_SHIPPING_LABEL_DESC">
+				  <option value="0">JNO</option>
+				  <option value="1">JYES</option>
+				</field>
+				
+			    <field name="spacer3" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_URLSSETTINGS" />
+				<field name="auto_url" class="btn-group" type="radio" default="1" label="PARAM_AUTO_URL_LABEL" description="PARAM_AUTO_URL_DESC">
+				  <option value="0">JNO</option>
+				  <option value="1">JYES</option>
+				</field>
+				<field name="return_url" type="text" default="" size="50" label="PARAM_RETURNURL_LABEL" description="PARAM_RETURNURL_LABEL_DESC" />
+				<field name="cancel_url" type="text" default="" size="50" label="PARAM_CANCELURL_LABEL" description="PARAM_CANCELURL_LABEL_DESC" />
+				
+				<field name="spacer4" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_QUANTITYSETTINGS" />
+				<field name="quantity_text" type="text" default="Quantity:" label="PARAM_QUANTITY_LABEL" description="PARAM_QUANTITY_LABEL_DESC" />
+				<field name="global_showquantity" class="btn-group" type="radio" default="0" label="PARAM_GLOBAL_SHOWQTY_LABEL" description="PARAM_GLOBAL_SHOWQTY_DESC">
+				  <option value="0">JNO</option>
+				  <option value="1">JYES</option>
+				</field>
+				
+				<field name="spacer5" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_EMAILSETTINGS" />
+				<field name="email_notify_send" class="btn-group" type="radio" default="1" label="PARAM_SENDNOTIFY_LABEL" description="PARAM_SENDNOTIFY_LABEL_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="email_notify_subject" type="textarea" rows="5" cols="30" default="Order placed, require your attention." label="PARAM_NOTIFY_SUBJECT_LABEL" description="PARAM_NOTIFY_SUBJECT_LABEL_DESC" />
+				<field name="email_notify_body" type="textarea" rows="10" cols="30" default="An order has been placed and require your attention. Please check your Paypal account for payment confirmation." label="PARAM_NOTIFY_BODY_LABEL" description="PARAM_NOTIFY_BODY_LABEL_DESC" />
+				<field name="email_notify_address" type="text" default="" size="50" label="PARAM_ADDRESS_EMAIL_LABEL" description="PARAM_ADDRESS_EMAIL_LABEL_DESC" />
+				
+				<field name="spacer6" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_USERFORMSETTINGS" />
+				<field name="showinput_miniform" class="btn-group" type="radio" default="0" label="PARAM_SHOWINPUTMINIFORM_LABEL" description="PARAM_SHOWINPUTMINIFORM_DESC">
+			      <option value="0">JNO</option>
+			      <option value="1">JYES</option>
+		    	</field>
+			    
+			    <field name="showinput_name" class="btn-group" type="radio" default="1" label="PARAM_SHOWINPUTNAME_LABEL" description="PARAM_SHOWINPUTNAME_DESC">
+			      <option value="0">JNO</option>
+			      <option value="1">JYES</option>
+			      <option value="3">YESREQUIRED</option>
+			    </field>
+			    
+			    <field name="showinput_email" class="btn-group" type="radio" default="3" label="PARAM_SHOWINPUTEMAIL_LABEL" description="PARAM_SHOWINPUTEMAIL_DESC">
+			      <option value="0">JNO</option>
+			      <option value="1">JYES</option>
+			      <option value="3">YESREQUIRED</option>
+			    </field>
+			    
+			    <field name="showinput_note" class="btn-group" type="radio" default="0" label="PARAM_SHOWINPUTNOTE_LABEL" description="PARAM_SHOWINPUTNOTE_DESC">
+			      <option value="0">JNO</option>
+			      <option value="1">JYES</option>
+			    </field>
+	     
+	     		<field name="spacer7" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_VIEWSETTINGS" />
+				<field name="open_window" class="btn-group" type="radio" default="_floating" label="PARAM_OPEN_WINDOW_LABEL" description="PARAM_OPEN_WINDOW_DESC">
+					<option value="_floating">Floating window</option>
+				  	<option value="_blank">Blank window</option>
+			  		<option value="_self">Self window</option>
+				</field>
+				<field name="floating_width" type="text" default="960" label="PARAM_FLOATING_WIDTH" description="PARAM_FLOATING_WIDTH_DESC" />
+				<field name="floating_height" type="text" default="480" label="PARAM_FLOATING_HEIGHT" description="PARAM_FLOATING_HEIGHT_DESC" />
+							
+				<field name="showonly_viewarticle" class="btn-group" type="radio" default="0" label="PARAM_SHOWONLY_VIEW_ARTICLE_LABEL" description="PARAM_SHOWONLY_VIEW_ARTICLE_LABEL_DESC">
+			      <option value="0">JNO</option>
+			      <option value="1">JYES</option>
+			    </field>
+	    
+				<field name="css_form_class" type="text" default="" label="PARAM_CSS_FORM_LABEL" description="PARAM_CSS_FORM_DESC" />
+				<field name="css_infoxtd_class" type="text" default="" label="PARAM_CSS_INFOXTD_LABEL" description="PARAM_CSS_INFOXTD_DESC" />
+
+				<field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_INSTANTPAYPAL_ADVANCED" />
+				<field name="includeevent" class="btn-group" type="radio" default="onContentAfterDisplay" label="PARAM_INCLUDE_EVENT" description="PARAM_INCLUDE_EVENT_DESC">
+					<option value="onContentAfterDisplay">PROCESS_ARTICLES</option>              
+					<option value="onContentPrepare">PROCESS_ARTICLES_AND_MODULES</option>
+				</field>
+				<field name="sandbox_mode" class="btn-group" type="radio" default="0" label="PARAM_SANDBOX_LABEL" description="PARAM_SANDBOX_LABEL_DESC">
+				  <option value="0">No</option>
+				  <option value="1">Yes</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

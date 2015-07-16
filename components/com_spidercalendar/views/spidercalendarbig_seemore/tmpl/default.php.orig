@@ -1,0 +1,177 @@
+<?php  
+
+ /**
+ * @package Spider Calendar
+ * @author Web-Dorado
+ * @copyright (C) 2011 Web-Dorado. All rights reserved.
+ * @license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ **/
+ 
+ defined('_JEXEC') or die('Restricted access'); 
+ 
+ $theme_id =JRequest::getVar('theme_id');
+$theme 	=& JTable::getInstance('spidercalendar_theme', 'Table');
+			// load the row from the db table
+$theme->load( $theme_id);
+ $cat_id=JRequest::getVar( "cat_id");$cat_ids=JRequest::getVar( "cat_ids");
+
+
+		$id=JRequest::getVar( "module_id");
+		$session =& JFactory::getSession();
+ 
+
+ 	 	 $title_color='#'.$theme->title_color;
+		 
+		 $title_size=$theme->title_font_size;
+		 
+		 $title_font=$theme->title_font;
+		 
+		 $title_style=$theme->title_style;
+		 
+		 $date_color='#'.$theme->date_color;
+		 
+		 $date_size=$theme->date_size;
+		 
+		 $date_font=$theme->date_font;
+		 
+		 $date_style=$theme->date_style;
+		 
+		 $next_prev_event_bgcolor='#'.$theme->next_prev_event_bgcolor;
+		 $next_prev_event_arrowcolor='#'.$theme->next_prev_event_arrowcolor;
+		 $show_event_bgcolor='#'.$theme->show_event_bgcolor;
+		 
+		 $popup_width = $theme->popup_width;
+		 $popup_height = $theme->popup_height;
+		 
+		 
+		 $date_format='';
+		 
+		
+
+		$like_button=$session->get( 'like_button'.$id);
+ 	
+		$rows=$this->rows;		$rows1=$this->rows1;		$catcolors=$this->catcolors;
+        $option=$this->option;
+		$activedate=explode('-',JRequest::getVar( "date",date("Y-m-d")));				
+		$activedatetimestamp = mktime(0, 0, 0, $activedate[1], $activedate[2], $activedate[0]);				
+		$activedatestr=JText::_(date("l",$activedatetimestamp)).', '.JText::_(date("d",$activedatetimestamp)).' '.JText::_(date("F",$activedatetimestamp)).', '.JText::_(date("Y",$activedatetimestamp));		
+		$date =  JRequest::getVar( "date",date("Y-m-d"));
+		$day = substr($date,8);
+		$calendar_id	=JRequest::getVar('calendar_id',0);
+		
+		 $ev_ids =JRequest::getVar('ev_ids');
+	
+    $ev_id = explode(',',$ev_ids);
+	
+
+ $document = JFactory::getDocument();	
+ $cmpnt_js_path = JURI::root(true).'/administrator/components/com_spidercalendar/elements';
+/*if (!JFactory::getApplication()->get('jquery')) {
+JFactory::getApplication()->set('jquery', true);
+$document->addScript($cmpnt_js_path.'/jquery.js');
+}*/
+ $document->addScript($cmpnt_js_path.'/jquery.js');
+$eventID=JRequest::getVar('eventID');
+ $cat_id = JRequest::getVar('cat_id'); $cat_ids = JRequest::getVar('cat_ids'); 
+ ?><style>body{margin: 0px !important;}		#sbox-window{padding:0px !important;}		#main{ padding: 0px !important;}	</style>
+  <script>
+  
+  
+  function next(day_events,ev_id,theme_id,calendar_id,date,day,cat_id,cat_ids)
+  {
+
+  
+	
+	  var p=0;
+	   for (var key in day_events)
+	   {	  p=p+1;
+		   if(day_events[key]==ev_id && day_events[parseInt(key) +1])
+		   {
+				   
+					
+				   window.location='index.php?option=com_spidercalendar&view=spidercalendarbig&theme_id='+theme_id+'&calendar_id='+calendar_id+'&eventID='+day_events[parseInt(key) +1]+'&date='+date+'&day='+day+'&cat_id='+cat_id+'cat_ids='+cat_ids+'&tmpl=component'
+		  
+		   }
+		 	   		   
+	  }
+
+	  
+  }
+  
+  
+  function change()
+  {
+  
+  $('#dayevent').ready(function() {
+  $('#dayevent').animate({
+      
+    opacity: 1,
+	
+    marginLeft: "0in",
+	
+   
+  }, 1000, function() {
+  
+
+    
+  });
+});
+  
+  }
+
+  window.onload=change();
+  
+  function prev(array1,ev_id,theme_id,calendar_id,date,day)
+  {
+   var day_events = array1;
+ 
+	   for (var key in day_events)
+	   {	  
+		   if(day_events[key]==ev_id && day_events[parseInt(key) -1] )
+		   {
+				   
+					
+				   window.location='index.php?option=com_spidercalendar&view=spidercalendarbig&theme_id='+theme_id+'&calendar_id='+calendar_id+'&eventID='+day_events[parseInt(key) -1]+'&date='+date+'&day='+day+'&cat_id='+cat_id+'cat_ids='+cat_ids+'&tmpl=component'
+		   }
+	  }
+	  
+  
+  
+  
+  }
+  
+  
+  document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+
+		window.parent.SqueezeBox.close();
+    }
+}; 
+  
+
+  
+  </script>
+  
+<div style="background-color:<?php echo $show_event_bgcolor ?>; height:<?php echo $popup_height-30 ?>px;padding:15px;text-align:left;">
+ <?php 
+ 
+$ik=1;
+ if($cat_ids=='') {
+
+ foreach($rows as $row)
+ {   
+	for($i=0;$i<count($ev_id);$i++)	{
+		$color=$row->color;
+			
+		if($row->cat_published==0 and $row->color!='')			
+			$color='';		if($row->id==$ev_id[$i])			echo '<div ><a  style="font-size:'.$title_size.'px;color:'.$title_color.'; line-height:30px" href="index.php?option=com_spidercalendar&view=spidercalendarbig&theme_id='.$theme_id.'&calendar_id='.$calendar_id.'&ev_ids='.$ev_ids.'&eventID='.$row->id.'&date='.$date.'&day='.$day.'&tmpl=component"><span style = "border-left:2px solid #'.$color.';">'.($i+1).' '.$row->title .'</span></a></div>';	}
+  } }   else  {    $ev_ids= '';    foreach($catcolors as $row)	  $ev_ids.=$row->id.',';	      $ev_ids = substr($ev_ids, 0,-1);	    foreach($catcolors as $row)    {		echo '<div ><a  style="font-size:'.$title_size.'px;color:'.$title_color.'; line-height:30px" href="index.php?option=com_spidercalendar&view=spidercalendarbig&theme_id='.$theme_id.'&calendar_id='.$calendar_id.'&ev_ids='.$ev_ids.'&eventID='.$row->id.'&date='.$date.'&day='.$day.'&cat_id='.$cat_id.'&cat_ids='.$cat_ids.'&tmpl=component"><span style = "border-left:2px solid #'.$row->color.';">'.$ik.' '.$row->title .'</span></a></div>';         $ik++;  }
+ }
+ 
+ 
+ 
+ 
+ ?>
+ </div>
+ 

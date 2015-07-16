@@ -1,0 +1,125 @@
+/*---------------------------------------------------------------- 
+  Copyright:
+  Copyright (C) 2008 - 2013 IceTheme. All Rights Reserved
+  
+  License:
+  GNU General Public License version 2 
+  
+  Author:
+  IceTheme - http://wwww.icetheme.com
+---------------------------------------------------------------- */
+
+
+/* Creating the fade effect */
+.iceslideshow.carousel-fade .item {
+	opacity: 0;
+	-webkit-transition-property: opacity;
+	-moz-transition-property: opacity;
+	-o-transition-property: opacity;
+	transition-property: opacity;}
+	
+	.iceslideshow.carousel-fade .active {
+		opacity: 1;}
+
+	.iceslideshow.carousel-fade .active.left,
+	.iceslideshow.carousel-fade .active.right {
+		left: 0;
+		opacity: 0;
+		z-index: 1;}
+
+   .iceslideshow.carousel-fade .next.left,
+   .iceslideshow.carousel-fade .prev.right {
+      opacity: 1;}
+	  
+	
+		
+/* Captions */
+.iceslideshow .carousel-caption {
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-in-out;
+	-ms-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-out;
+	transition:  all .2s ease-out;
+	opacity:0;
+	z-index:9;
+	margin-bottom:-50px}
+	
+	.iceslideshow:hover .carousel-caption {
+		opacity:1;
+		margin-bottom:0}
+		
+		.carousel-caption h4 {
+			margin: 0 0 5px;
+			font-size: 22px;
+			margin-bottom: 8px;
+			margin-top: 5px;}
+
+	
+
+/* Controls */
+.iceslideshow .carousel-control {
+	z-index:9;
+	-webkit-transition: all .2s ease-out;
+	-moz-transition: all .2s ease-in-out;
+	-ms-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-out;
+	transition:  all .2s ease-out;
+	-webkit-transform:scale(0);
+	-moz-transform:scale(0);
+	-o-transform:scale(0);
+	transform:scale(0);
+	opacity:0}
+	
+	.iceslideshow .carousel-control.left {
+		margin-left:-30px;}
+	
+	.iceslideshow .carousel-control.right {
+		margin-right:-30px;}	
+		
+	
+	
+		.iceslideshow:hover .carousel-control {
+			-webkit-transform:scale(1);
+			-moz-transform:scale(1);
+			-o-transform:scale(1);
+			transform:scale(1);
+			margin-left:0;
+			margin-right:0;
+			opacity:.5}
+			
+			.iceslideshow:hover .carousel-control:hover {
+				opacity:1}
+
+
+/* Indicators */
+.iceslideshow .carousel-indicators {
+	right: 12px;
+}
+
+	.iceslideshow .carousel-indicators li {
+		cursor:pointer;
+		width: 12px;
+		height: 12px;
+		margin-left: 3px;
+	}
+
+
+/* Adjust responive part */
+@media only screen and (max-width: 480px) {
+	
+	.iceslideshow .carousel-control {
+		-webkit-transform:scale(1);
+		-moz-transform:scale(1);
+		-o-transform:scale(1);
+		transform:scale(1);
+		opacity:.5;
+		margin-left:0!important;
+		margin-right:0!important;
+	}
+	
+	.iceslideshow .carousel-caption {
+		margin: 0;
+		opacity: 1;
+	}
+	
+}

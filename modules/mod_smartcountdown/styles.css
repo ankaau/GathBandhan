@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+
+/* Preview (admin) */
+
+div #scdp-digits-preview {
+	width:100%;
+	clear:both;
+}
+
+div #scdp-digits-preview fieldset {
+	float:left;
+	border:thin solid black;
+}
+div #scdp-digits-preview .sc-fx-wrapper {
+	border:thin solid #888;
+}
+
+#jform_params_digits_xml {
+	width:100%;
+}
+
+/* Site and general */
+
+div.scdp-container {
+	width:100%;
+}
+
+div.scdp-wrapper-center {
+	display:inline-block;
+}
+
+div.scdp-text-horz, div.scdp-counter-horz {
+	float:left;
+}
+
+div.scdp-text-vert, div.scdp-counter-vert {
+	clear:left;
+}
+
+/* Units */
+
+div.scdp-unit-row {
+	float:left;
+}
+
+div.scdp-unit-column {
+	clear:left;
+}
+
+/* Numbers */
+
+div.scdp-number-horz {
+	float:left;
+	text-align:right;
+}
+div.scdp-number-vert {
+	clear:left;
+	text-align:center;
+}
+
+/* Labels */
+
+div.scdp-label-horz {
+	float:left;
+}
+div.scdp-label-vert {
+	clear:left;
+	text-align:center;
+}
+
+/* Wrappers and fx-elements */
+
+div.scdp-digits-wrapper, div.scdp-label-wrapper {
+	display:inline-block;
+	*display: inline; 
+    zoom: 1;
+}
+
+div.sc-fx-wrapper {
+	overflow:hidden;
+	position:relative;
+	float:left;
+	text-align:left;
+}
+
+div.sc-fx-wrapper div, div.sc-fx-wrapper img {
+	position:absolute;
+	display:block;
+}
+
+div.sc-fx-wrapper img {
+	margin:0 !important;
+	padding:0 !important;
+}
+
+.clear {
+	clear:both;
+}
+
+.clearfix:after {
+	clear: both; 
+	content: "."; 
+	display: block; 
+	height: 0; 
+	visibility: hidden; 
+	font-size: 0; 
+}
+*+html .clearfix{ 
+  min-height: 1%; 
+} 
+
+	

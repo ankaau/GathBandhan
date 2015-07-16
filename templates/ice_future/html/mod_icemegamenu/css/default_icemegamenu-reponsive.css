@@ -1,0 +1,115 @@
+/**
+ * IceMegaMenu Extension for Joomla 3.0 By IceTheme
+ * 
+ * 
+ * @copyright	Copyright (C) 2012 IceTheme.com. All rights reserved.
+ * @license		GNU General Public License version 2
+ * 
+ * @Website 	http://www.icetheme.com/Joomla-Extensions/icemegamenu.html
+ *
+ */
+
+.collapse {
+  overflow: hidden!important;}
+
+@media (min-width: 980px) {
+}
+
+
+@media (max-width: 979px) {
+
+.icemegamenu { float:none; }
+
+
+.icemegamenu > ul { background:#5990DE; margin-top:20px; }
+
+  .ice-megamenu-toggle { display:inline-block; }
+  .icemegamenu > ul > li,
+  .icemegamenu > ul > li.active,
+   .icemegamenu > ul > li:hover { width: 100%; background:#5990DE }
+  
+  
+	#icemegamenu > li ul.icesubMenu {
+		max-height: none;
+		float: left;
+		opacity: 1;
+		position: relative;
+		padding:0;
+		left:0!important;
+		top: 0!important;
+		visibility: visible;
+		margin:0!important;
+		width: 100% !important;
+		background:#6E9EE2}
+		
+		
+			
+	#icemegamenu > li > ul.icesubMenu .iceCols{ width:100%!important;}
+	#icemegamenu > li > ul.icesubMenu li{
+		width:100%!important;
+	}
+	#icemegamenu .parent .icemodules{	}
+	
+	ul.icesubMenu{border:none}
+	
+	ul.icesubMenu li.parent{background:none;}		
+	
+	
+	.icemegamenu > ul > li a.iceMenuTitle{
+		font-size:15px;
+		height:auto;
+		padding-left:15px;
+		border-bottom:1px dotted rgba(255, 255, 255, .2)!important}
+		
+		.icemegamenu > ul > li > a.iceMenuTitle > span.icemega_nosubtitle {
+			padding-top:0}
+	
+	ul.icesubMenu > li a.iceMenuTitle{
+		font-size:12px;
+		margin:0px;
+		padding-left:35px;
+		background-position:20px 10px}
+	
+		
+	
+		#icemegamenu > li > ul.icesubMenu li > ul{
+			float: left;
+			opacity: 1;
+			position: relative;
+			top: 0!important;
+			visibility: visible;
+			width: 100% !important;
+			left: 0;		
+			margin:0px;
+			padding:0;
+			border:none;
+			background:#333;}
+			
+			/* level 2 */
+			ul.sub_level_2 li > a.iceMenuTitle {
+				padding-left: 55px!important;
+				background-position: 40px 10px!important;}
+				
+			/* level 3 */
+			ul.sub_level_3 li > a.iceMenuTitle {
+				padding-left: 75px!important;
+				background-position: 60px 10px!important;}
+				
+					
+
+		/* hide modules */
+		.icesubMenu .icemega_cover_module {margin:0}
+}
+
+
+@media (max-width: 480px) {
+	
+.icemegamenu > ul { margin-top:0; }
+	
+	.icemegamenu {
+		text-align:left}
+	
+}
+
+
+

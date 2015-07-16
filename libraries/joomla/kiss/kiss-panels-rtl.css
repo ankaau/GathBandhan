@@ -1,0 +1,54 @@
+/* -- TAB STYLES ----------------------------- */
+dl.tabs {
+	float: right !important;
+	margin: 10px 0 -1px 0!important;
+}
+
+dl.tabs dt {
+	float: right !important;
+}
+
+
+div.current label,
+div.current span.faux-label {
+	float: right !important;
+}
+
+div.current fieldset.radio {
+	float: right !important;
+}
+
+div.current fieldset.checkboxes {
+	float: right !important;
+}
+
+div.current fieldset.checkboxes input {
+	clear: right;
+	float: right !important;
+}
+
+div.current fieldset.checkboxes label {
+	clear: left;
+}
+
+.panel h3.pane-toggler a {
+  text-align   : right;	  
+	    
+}
+
+.panel h3.pane-toggler-down a {
+  text-align   : right;
+
+}
+.panel h3 {
+  font-size	   : 100% !important;  
+  text-align	: right;
+}
+.panel h3.pane-toggler-down a span {
+  vertical-align   : bottom;  
+  text-align	: right;
+}
+img.sliderimage {
+  float		 	: right !important; 
+  margin-left	: 10px !important;
+}

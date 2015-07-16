@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE install
+
+  PUBLIC "-//Joomla! 1.5//DTD plugin 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/plugin-install.dtd">
+  
+<extension type="component" version="3.0" method="upgrade">
+        <name>COM_SPIDERCALENDAR</name> 
+        <author>Web-Dorado</author> 
+		<creationDate>January 2011</creationDate>
+		<copyright>Copyright (C) 2011 Web-Dorado.com 2011. All rights reserved.</copyright> 
+		<license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+        <authorEmail>info@web-dorado.com</authorEmail> 
+        <authorUrl>http://www.Web-Dorado.com</authorUrl> 
+        <version>3.2.11</version> 
+        <description>
+		Spider Calendar is a highly configurable Joomla extension which allows you to have multiple organized events in a calendar.
+	</description>
+	<install>
+    		<sql>
+     			 <file charset="utf8" driver="mysql">install.mysql.sql</file>
+    		</sql>
+ 	 </install>
+ 		 <uninstall>
+    			<sql>
+     			 <file charset="utf8" driver="mysql">uninstall.mysql.sql</file>
+    			</sql>
+  		</uninstall>
+
+
+	<files>
+		<folder>models</folder>
+		<folder>views</folder>
+		<filename>controller.php</filename>
+		<filename>spidercalendar.php</filename>
+		<filename>index.html</filename>
+	</files>
+    
+	<languages>
+                <language tag="en-GB">en-GB.com_spidercalendar.ini</language>
+    </languages>
+	
+	<administration>
+		<menu link="option=com_spidercalendar">COM_SPIDERCALENDAR</menu>
+		<submenu>
+                        <menu task="calendar">SPIDERCALENDAR_CALENDAR</menu>
+						<menu task="event_category">SPIDERCALENDAR_EVENT_CATEGORY</menu>
+                        <menu task="theme">SPIDERCALENDAR_THEME</menu>
+						<menu task="plugin">PLUGIN_CODE</menu>
+						<menu task="license">SPIDERCALENDAR_LICENSE</menu>
+						
+         </submenu>
+	        <files folder="admin">
+		        <folder>tables</folder>
+				<folder>elements</folder>
+				<folder>jscolor</folder>
+				<folder>language</folder>
+			<filename>admin.spidercalendar.html.php</filename>
+			<filename>spidercalendar.php</filename>
+			<filename>toolbar.spidercalendar.html.php</filename>
+			<filename>toolbar.spidercalendar.php</filename>
+			<filename>install.mysql.sql</filename>
+	    	<filename>uninstall.mysql.sql</filename>
+			<filename>datefields.xml</filename>
+			<filename>index.html</filename>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+	    </files>
+		<languages folder="admin">
+			
+			<language tag="en-GB">language/en-GB/en-GB.com_spidercalendar.sys.ini</language>
+		</languages>
+ 	</administration>
+</extension>

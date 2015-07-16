@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields>
+        <fieldset name="fs">
+            <field
+                    type="text"
+                    name="startdate"
+                    id="st_d"
+                    size="10"
+                    readonly="true"
+                    value=""
+                    maxLength="10" />
+	    <field
+                    type="text"
+                    name="enddate"
+                    id="en_d"
+                    size="10"
+                    readonly="true"
+                    value=""
+                    maxLength="10" />
+<field
+                    type="text"
+                    name="date"
+                    id="date"
+                    size="10"
+                    readonly="false"
+                    value=""
+                    maxLength="10" />
+	<field
+                    type="text"
+                    name="date_end"
+                    id="de_d"
+                    size="10"
+                    readonly="false"
+                    value=""
+                    maxLength="10" />
+        </fieldset>
+    </fields>
+</form>

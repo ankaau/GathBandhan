@@ -1,0 +1,887 @@
+﻿<?php
+ 
+ /**
+ * @package Spider Calendar
+ * @author Web-Dorado
+ * @copyright (C) 2011 Web-Dorado. All rights reserved.
+ * @license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ **/
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+$Itemid=JRequest::getVar( "Itemid","");
+		 
+$id=JRequest::getVar( "rand");
+
+
+$session =& JFactory::getSession();
+$theme_id =JRequest::getVar('theme_id');
+$theme 	=& JTable::getInstance('spidercalendar_theme', 'Table');
+			// load the row from the db table
+$theme->load( $theme_id);
+$db =& JFactory::getDBO();			
+	
+$categories=$this->categories; 		
+$calendar	=JRequest::getVar('calendar');
+
+$bgid=$session->get('calendar_style');
+
+//$weekstart=$session->get('weekstart');
+
+$titlescloud=$session->get('titlescloud');
+
+		 $cal_width=$theme->width;
+		 $bg_top = '#'.$theme->bg_top;
+		 $bg_bottom = '#'.$theme->bg_bottom;
+	 	 $border_color = '#'.$theme->border_color;
+		 $text_color_year = '#'.$theme->text_color_year;
+		 $text_color_month = '#'.$theme->text_color_month;
+		 $color_week_days = '#'.$theme->text_color_week_days;
+		 $text_color_other_months = '#'.$theme->text_color_other_months;
+		 $text_color_this_month_unevented = '#'.$theme->text_color_this_month_unevented;
+		 $evented_color = '#'.$theme->text_color_this_month_evented;
+		 $evented_color_bg = '#'.$theme->bg_color_this_month_evented;
+		 $color_arrow_year = '#'.$theme->arrow_color_year;
+		 $color_arrow_month = '#'.$theme->arrow_color_month;
+		 $sun_days = '#'.$theme->text_color_sun_days;
+		 $event_title_color = '#'.$theme->event_title_color;
+		 $current_day_border_color = '#'.$theme->current_day_border_color;
+		 $cell_border_color = '#'.$theme->cell_border_color;
+		 $cell_height = $theme->cell_height;
+		 $popup_width = $theme->popup_width;
+		 $popup_height = $theme->popup_height;
+		 $number_of_shown_evetns = $theme->number_of_shown_evetns;
+		 $sundays_font_size = $theme->sundays_font_size;
+		 $other_days_font_size= $theme->other_days_font_size;
+		 $weekdays_font_size= $theme->weekdays_font_size;
+		 $border_width= $theme->border_width;
+		 $top_height=$theme->top_height;
+		 $bg_color_other_months='#'.$theme->bg_color_other_months;
+		 $sundays_bg_color='#'.$theme->sundays_bg_color;
+		 $weekdays_bg_color='#'.$theme->weekdays_bg_color;
+		 $weekstart=$theme->week_start_day;
+		 $weekday_sunday_bg_color='#'.$theme->weekday_sunday_bg_color;
+		 $border_radius=$theme->border_radius;
+		 $border_radius2=$border_radius-$border_width;
+		 $week_days_cell_height=$theme->week_days_cell_height;
+		 $year_font_size=$theme->year_font_size;
+		 $month_font_size=$theme->month_font_size;
+		 $arrow_size=$theme->arrow_size;
+		 $arrow_size_hover=$arrow_size+5;
+		 
+		 $next_month_text_color = '#'.$theme->next_month_text_color;
+		 $prev_month_text_color = '#'.$theme->prev_month_text_color;
+		 $next_month_arrow_color = '#'.$theme->next_month_arrow_color;
+		 $prev_month_arrow_color = '#'.$theme->prev_month_arrow_color;
+		 $next_month_font_size = $theme->next_month_font_size;
+		 $prev_month_font_size = $theme->prev_month_font_size;
+		 $month_type = $theme->month_type;
+		
+		
+			$date_bg_color = '#'.$theme->date_bg_color;
+		$event_bg_color1 = '#'.$theme->event_bg_color1;
+		$event_bg_color2 = '#'.$theme->event_bg_color2;
+		$event_num_bg_color1 = '#'.$theme->event_num_bg_color1;
+		$event_num_bg_color2 = '#'.$theme->event_num_bg_color2;
+		$event_num_color = '#'.$theme->event_num_color;
+		
+		$date_font_size = $theme->date_font_size;
+		$event_num_font_size = $theme->event_num_font_size;
+
+		 
+		 
+		$event_table_height = $theme->event_table_height;
+		$date_height = $theme->date_height;
+		 
+		 
+		 
+		 
+		 $bg=$session->get( 'border_color');
+		
+		 $bgborder=$session->get( 'bg_border_color');
+		
+		
+
+		
+
+		 $bg_color_selected=$session->get( 'bg_color_selected');
+
+		
+		 
+	
+		 
+ $day_month_font_size = $theme->day_month_font_size;
+		$week_font_size = $theme->week_font_size;
+		
+		 $day_month_font_color = '#'.$theme->day_month_font_color;
+		$week_font_color = '#'.$theme->week_font_color;
+
+
+
+		 $views_tabs_bg_color = '#'.$theme->views_tabs_bg_color;
+		
+				 $views_tabs_text_color = '#'.$theme->views_tabs_text_color;
+		 $views_tabs_font_size = $theme->views_tabs_font_size;
+		
+		
+
+
+		
+
+
+		 
+
+		 $text_color_selected=$session->get( 'text_color_selected');
+
+		 $border_day=$session->get( 'border_day');
+		 
+		 $calendar_width=$session->get( 'calendar_width');
+		 
+		  $calendar_bg=$session->get( 'calendar_bg');
+		 
+		 $titlescloud_text_color=$session->get( 'titlescloud_text_color');
+		 
+		 ///////////////////////////////////////////////////
+		 $calendar_id = JRequest::getVar('calendar');
+		 
+		 if($cell_height=='')
+		 $cell_height=70;
+		 
+		 if($cal_width=='')
+		 $cal_width=700;
+		
+		
+		
+$db =& JFactory::getDBO();
+
+//$realtoday = getdate();
+/*$uri = $_SERVER['HTTP_REFERER'];
+$u =& JURI::getInstance( $uri );*/
+$date_REFERER=JRequest::getVar( "date",date("Y-m")); 
+$year_REFERER=substr($date_REFERER,0,4); 
+$month_REFERER=Month_name(substr( $date_REFERER,5,2)); 
+$day_REFERER=substr( $date_REFERER,8,2); 
+
+
+
+$date=JRequest::getVar( "date",date("Y-m-d")); 
+
+$year=substr($date,0,4); 
+
+$month=Month_name(substr( $date,5,2)); 
+
+
+$day=substr( $date,8,2); 
+
+echo '&nbsp;<style type="text/css">';
+echo"
+
+#bigcalendar".$id." table
+{
+border-collapse: initial;
+border:0px;
+max-width: none;
+}
+#bigcalendar".$id." table tr:hover td
+{
+background: none;
+
+}
+ #bigcalendar".$id." table td
+ {
+ padding: 0px;
+vertical-align: none;
+border-top:none;
+line-height: none;
+text-align: none;
+ 
+ }
+ 
+#bigcalendar".$id." p, ol, ul, dl, address
+{
+margin-bottom:0;
+
+}
+ 
+
+ #bigcalendar".$id." td,#bigcalendar".$id." tr,  #spiderCalendarTitlesList td,  #spiderCalendarTitlesList tr
+ {
+ border:none;
+ }
+#bigcalendar".$id." .general_table
+{
+
+border-radius: ".$border_radius."px;
+
+}
+#bigcalendar".$id." .top_table
+ {
+
+border-top-left-radius: ".$border_radius2."px;
+border-top-right-radius: ".$border_radius2."px;
+
+}
+ #bigcalendar".$id." .cala_arrow a:link, #bigcalendar".$id." .cala_arrow a:visited {
+	
+	text-decoration:none;
+	background:none;
+	font-size:".$arrow_size."px;
+}
+#bigcalendar".$id." .cala_arrow a:hover {
+	
+
+	text-decoration:none;
+	background:none;
+}
+#bigcalendar".$id." .cala_day a:link, #bigcalendar".$id." .cala_day a:visited {
+	text-decoration:none;
+	background:none;
+	font-size:12px;
+	color:red;
+	
+}
+
+
+#bigcalendar".$id." .cala_day a:hover {
+	
+	text-decoration:none;
+	background:none;
+	
+}
+#bigcalendar".$id." .cala_day 
+{
+
+border:1px solid ".$cell_border_color.";
+vertical-align:top;
+
+}
+
+#bigcalendar".$id." .weekdays
+{
+
+border:1px solid ".$cell_border_color.";
+
+
+}
+#bigcalendar".$id." .week_days
+{
+font-size:".$weekdays_font_size."px;
+}
+
+
+#bigcalendar".$id." .calyear_table {
+	border-spacing:0;
+	width:100%;
+}
+#bigcalendar".$id." .calmonth_table {	
+	border-spacing:0;
+	width:100%;
+}
+#bigcalendar".$id." .calbg, #bigcalendar".$id." .calbg td
+{
+	background-color:".$bg.";
+	text-align:center;
+	width:14%;
+}
+#bigcalendar".$id." .caltext_color_other_months 
+{
+	color:".$text_color_other_months.";
+	border:1px solid ".$cell_border_color.";
+	vertical-align:top;
+	
+}
+#bigcalendar".$id." .caltext_color_this_month_unevented {
+	color:".$text_color_this_month_unevented.";
+}
+#bigcalendar".$id." .calfont_year {
+	font-family:".$session->get( 'calendar_font_year'.$id).";
+	font-size:24px;
+	font-weight:bold;
+	color:".$text_color_year.";
+}
+
+#bigcalendar".$id." .calsun_days 
+{
+	color:".$sun_days.";
+	border:1px solid ".$cell_border_color.";
+	vertical-align:top;
+	text-align:left;
+	background-color:".$sundays_bg_color.";
+	
+}
+#bigcalendar".$id." .calbottom_border
+{
+
+}
+
+#bigcalendar".$id." .calborder_day
+{
+border: solid ".$border_day." 1px;
+}
+
+#spiderCalendarTitlesList
+{
+display:none; width:331px; margin:0px; padding:0px; border:none; z-index:99;position:fixed;  color:#".$titlescloud_text_color.";
+}
+
+#spiderCalendarTitlesList #sc1 
+{
+padding:0px; margin:0px; height:65px; background:url('".JURI::root(true)."/modules/mod_spidercalendar/images/TitleListBg1.png') no-repeat;
+}
+#spiderCalendarTitlesList #sc2
+{
+padding:0px; margin:0px; background:url('".JURI::root(true)."/modules/mod_spidercalendar/images/TitleListBg2.png') repeat-y;
+}
+#spiderCalendarTitlesList #sc3
+{
+padding:0px; margin:0px; height:32px; background:url('".JURI::root(true)."/modules/mod_spidercalendar/images/TitleListBg3.png') no-repeat;
+}
+#spiderCalendarTitlesList p
+{
+margin:20px;
+margin-top:0px;
+text-align:left;
+}
+
+#bigcalendar".$id." .views
+{
+float: right;
+background-color: ".$views_tabs_bg_color.";;
+height: 25px;
+width: 70px;
+margin-right: 2px;
+text-align: center;
+cursor:pointer;
+position: relative;
+top: 5px;
+}
+
+
+";
+
+echo '</style>';
+
+
+$view=JRequest::getVar('view');
+
+
+$cell_width=$cal_width/7;
+
+$month_day_count = date('t',mktime(0, 0, 0, Month_num($month), 1, $year ));
+
+$prev_month_day_count = date('t',mktime(0, 0, 0, Month_num($month)-1, 1, $year ));
+
+JHTML::_('behavior.modal'); 
+
+if($day>$month_day_count)
+{
+
+
+$month=Month_name(Month_num($month)+1);
+$day='01';
+}
+
+
+if((int)$day<1)
+{
+
+
+
+$month=Month_name(Month_num($month)-1);
+$day=$prev_month_day_count;
+
+
+
+}
+
+
+
+
+
+	
+	$week_days=array();			
+				
+$d = new DateTime($date);
+
+
+$weekday = $d->format('w');
+$diff = ($weekday == 0 ? 6 : $weekday - 1); // Monday=0, Sunday=6
+if($weekstart=="su")
+$diff=$diff+1;
+$d->modify("-$diff day");
+
+$d->modify("-1 day");
+$prev_date=$d->format('Y-m-d');
+
+$d->modify("+1 day");
+
+$week_days[]=$d->format('Y-m-d');
+
+for($i=1;$i<7;$i++)
+{
+$d->modify('+1 day');
+$week_days[]=$d->format('Y-m-d');
+}
+
+if($weekstart=="su")
+$d->modify('+2 day');
+else
+$d->modify('+1 day');
+
+$next_date = $d->format('Y-m-d');
+
+
+$prev_month=add_0((int)substr($prev_date,5,2)-1);
+
+$this_month=add_0((int)substr($prev_date,5,2));
+
+$next_month=add_0((int)substr($prev_date,5,2)+1);
+
+if($next_month=='13')
+$next_month='01';
+
+if($prev_month=='00')
+$prev_month='12';
+
+$app = JFactory::getApplication('site');
+$componentParams = $app->getParams('com_spidercalendar');
+
+$defaultview=JRequest::getVar('def_view',$componentParams->get('defaultview'));
+
+$viewselect=JRequest::getVar('views',$componentParams->get('viewselect'));
+
+$views=explode(',',$viewselect);
+array_pop($views);
+$display='';
+
+if(count($views)==0)
+$display="display:none";
+
+if(count($views)==1 and $views[0]==$defaultview)
+$display="display:none";
+?>
+
+<div style="width:<?php echo $cal_width ?>px;">
+<table  cellpadding="0" cellspacing="0">
+<tr>
+<td>
+<div id="views_tabs" style="<?php echo $display ?>">
+<div class="views" style="<?php if(!in_array('day',$views) AND $defaultview!='day' ) echo 'display:none;' ;if($view=='bigcalendarday') echo 'background-color:'.$bg_top.';height:30px;top: 0' ?>" onclick="showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendarday&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&tmpl=component&Itemid='.JRequest::getVar( "Itemid","").'&date='.$year.'-'.add_0((Month_num($month))).'-'.date('d') ;?>','<?php echo $id ?>')" ><span style="position:relative;top:25%;color:<?php echo $views_tabs_text_color ?>;font-size:<?php echo $views_tabs_font_size  ?>px"><?php echo  JText::_('TAB_DAY') ?></span></div>
+
+<div class="views" style="<?php if(!in_array('week',$views) AND $defaultview!='week' ) echo 'display:none;' ;if($view=='bigcalendarweek') echo 'background-color:'.$bg_top.';height:30px;top: 0' ?>" onclick="showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendarweek&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&tmpl=component&Itemid='.JRequest::getVar( "Itemid","").'&months='.$prev_month.','.$this_month.','.$next_month.'&date='.$year.'-'.add_0((Month_num($month))).'-'.date('d') ;?>','<?php echo $id ?>')" ><span style="position:relative;top:25%;color:<?php echo $views_tabs_text_color ?>;font-size:<?php echo $views_tabs_font_size  ?>px"><?php echo  JText::_('TAB_WEEK') ?></span></div>
+
+<div class="views" style="<?php if(!in_array('list',$views) AND $defaultview!='list' ) echo 'display:none;' ; if($view=='bigcalendarlist') echo 'background-color:'.$bg_top.';height:30px;top: 0' ?>" onclick="showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendarlist&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&tmpl=component&Itemid='.JRequest::getVar( "Itemid","").'&date='.$year.'-'.add_0((Month_num($month))) ;?>','<?php echo $id ?>')" ><span style="position:relative;top:25%;color:<?php echo $views_tabs_text_color ?>;font-size:<?php echo $views_tabs_font_size  ?>px"><?php echo  JText::_('TAB_LIST') ?></span></div>
+
+<div class="views" style="<?php if(!in_array('month',$views) AND $defaultview!='month' ) echo 'display:none;' ; if($view=='bigcalendar') echo 'background-color:'.$bg_top.';height:30px;top: 0' ?>" onclick="showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendar&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&tmpl=component&Itemid='.JRequest::getVar( "Itemid","").'&date='.$year.'-'.add_0((Month_num($month))) ;?>','<?php echo $id ?>')" ><span style="position:relative;top:25%;color:<?php echo $views_tabs_text_color ?>;font-size:<?php echo $views_tabs_font_size  ?>px"><?php echo  JText::_('TAB_MONTH') ?></span></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<table cellpadding="0" cellspacing="0"  class="general_table"  style="border-spacing:0; width:<?php echo $cal_width ?>px;border:<?php echo $border_color ?> solid <?php echo $border_width ?>px; margin:0; padding:0;background-color:<?php echo $bg_bottom; ?>;">
+
+    <tr>
+
+        <td width="100%" style=" padding:0; margin:0">
+
+            
+              <table  cellpadding="0" cellspacing="0" border="0" style="border-spacing:0; font-size:12px; margin:0; padding:0;  width="<?php echo $cal_width ?>;"  >
+
+
+                <tr  style="height:40px; width:<?php echo $cal_width ?>">
+				
+			
+				
+                    <td class="top_table" align="center" colspan="7" style="background-image:url('components/com_spidercalendar/views/bigcalendar/images/Stver.png');padding:0; margin:0; background-color:<?php echo $bg_top ?>;height:20px; background-repeat: no-repeat;background-size: 100% 100%; " >
+
+                        <?php //YEAR TABLE ?>
+
+                   <table cellpadding="0" cellspacing="0" border="0" align="center" class="calyear_table"  style="margin:0; padding:0; text-align:center; width:<?php echo $cal_width ?>px; height:<?php echo $top_height ?>px;">
+
+                         
+								<tr>
+								
+								
+								<td style="width:100%;vertical-align:center">
+								<table style="width:100%;line-height:150%">
+								<tr>
+								
+								<td width="15%">
+								<div onclick="javascript:showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendarweek&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&Itemid='.JRequest::getVar( "Itemid","").'&months='.$prev_month.','.$this_month.','.$next_month.'&date='.($year-1).'-'.add_0((Month_num($month))).'-'.date('d') ?>','<?php echo $id ?>')" style="cursor:pointer;width:100%; height:35px; background-color: rgba(0,0,0,0.3);"><span style="top: 25%;position: relative;font-size: 26px;color:<?php echo $bg_top ?>"><?php echo $year-1 ?></span></div>
+								</td>
+								
+								
+									<td class="cala_arrow" width="15%"  style="text-align:right;margin:0px;padding:0px">
+									<a  style="text-shadow: 1px 1px 2px black;color:<?php echo $color_arrow_month ?>;"
+													href="javascript:showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php  
+											echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendarweek&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&Itemid='.JRequest::getVar( "Itemid","").'&date='.$prev_date.'&months='.$prev_month.','.$this_month.','.$next_month;
+
+									?>','<?php echo $id ?>')">&#9668;</a>
+									</td>
+									<td style="text-align:center; margin:0;" width="40%" >
+
+											<input type="hidden" name="month" readonly="" value="<?php echo $month?>"/>
+										   <span  style="font-family:arial; color:<?php echo $text_color_month;?>; font-size:<?php echo $month_font_size ?>px;text-shadow: 1px 1px black;">Week <?php echo date('W',mktime(0, 0, 0, month_num($month), $day, $year)).', '.$year; ?></span>
+										  
+											
+									</td>	
+									<td style="margin:0; padding:0;text-align:left" width="15%"  class="cala_arrow"> 
+									<a  style="text-shadow: 1px 1px 2px black;color:<?php echo $color_arrow_month ?>" href="javascript:showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php  
+
+									echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendarweek&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&Itemid='.JRequest::getVar( "Itemid","").'&date='.$next_date.'&months='.$prev_month.','.$this_month.','.$next_month;
+
+									?>','<?php echo $id ?>')">&#9658;</a>
+
+									</td>
+									
+									<td width="15%">
+								<div onclick="javascript:showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php echo JRoute::_('index.php?option=com_spidercalendar&def_view='.$defaultview.'&views='.$viewselect.'&view=bigcalendarweek&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id).'&format=row&Itemid='.JRequest::getVar( "Itemid","").'&months='.$prev_month.','.$this_month.','.$next_month.'&date='.($year+1).'-'.add_0((Month_num($month))).'-'.date('d') ?>','<?php echo $id ?>')" style="cursor:pointer;width:100%; height:35px; background-color: rgba(0,0,0,0.3);"><span style="top: 25%;position: relative;font-size: 26px;color:<?php echo $bg_top ?>"><?php echo $year+1 ?></span></div>
+								</td>
+													
+									</tr>
+									</table>
+									</td>	
+                            </tr>
+							
+                        </table>
+					
+                    </td>
+
+				
+				
+                    <td colspan="7" style="margin:0; padding:0; background-color:<?php echo $bg_top ?>;" >
+
+                        <?php //MONTH TABLE ?>
+
+                    </td>
+
+                </tr>
+
+				</tr>
+			
+			
+		<tr>	
+			<td>
+                <?php
+
+//$today=$realtoday;
+/*$document = &JFactory::getDocument();
+   $document->addScript("media/system/js/modal.js");
+   $document->addStyleSheet("media/system/css/modal.css");*/
+
+function add_0($month_num)
+{
+if($month_num<10)
+	return '0'.$month_num;
+	return $month_num;
+}
+
+	
+
+
+
+function Month_num($month_name)
+
+{
+	for( $month_num=1; $month_num<=12; $month_num++ )
+	
+	{  
+	    if (date( "F", mktime(0, 0, 0, $month_num, 1, 0 ) ) == $month_name)
+	    
+	    {  
+		return $month_num;  
+		
+	    } 
+	     
+	}
+	
+};
+
+function Month_name($month_num)
+
+{
+
+    $timestamp = mktime(0, 0, 0, $month_num, 1, 2005);
+ 
+    return date("F", $timestamp); 
+    
+};
+
+$month_first_weekday = date("N", mktime(0, 0, 0, Month_num($month), 1, $year));
+if($weekstart=="su"){
+$month_first_weekday++;
+if($month_first_weekday==8)
+$month_first_weekday=1;
+}
+
+$month_days = date("t", mktime(0, 0, 0, Month_num($month), 1, $year));
+
+$last_month_days = date("t", mktime(0, 0, 0, Month_num($month)-1, 1, $year));
+$last_month_days_count=date("t", mktime(0, 0, 0, Month_num($month)-1, 1, $year));
+$weekday_i=$month_first_weekday;
+
+
+$last_month_days=$last_month_days-$weekday_i+2;
+
+$percent=1;
+
+$sum=$month_days-8+$month_first_weekday;
+
+if($sum % 7 <> 0)
+
+$percent = $percent + 1;
+
+$sum = $sum - ( $sum % 7 );
+
+$percent = $percent + ( $sum / 7 );
+
+$percent=107/$percent;
+
+$all_array_days=$this->all_array_days;
+$all_array_days1=$this->all_array_days1;
+$all_title=$this->all_title;
+$all_ev_ids=$this->all_ev_ids;
+
+
+
+
+
+function week_convert($x)
+ {
+	if($x=='Mon')
+	return JText::_('MONDAY'); 
+	
+	if($x=='Tue')
+	return JText::_('TUESDAY'); 
+	
+	if($x=='Wed')
+	return JText::_('WEDNESDAY'); 
+	
+	if($x=='Thu')
+	return JText::_('THURSDAY'); 
+	
+	if($x=='Fri')
+	return JText::_('FRIDAY');
+	
+	if($x=='Sat')
+	return JText::_('SATURDAY');
+	
+	if($x=='Sun')
+	return JText::_('SUNDAY');
+	 
+	 
+	 
+ }
+ 
+
+ 
+
+
+
+
+
+$week=JRequest::getVar('week');
+
+
+
+	
+					
+
+
+
+
+
+/*if($weekstart=="su")
+	{
+		for($i=0;$i<=6;$i++)
+			{
+				$x=$week_days[$i];
+				$y=$week_days[6];
+				$week_days[$i]=$y;
+				$week_days[6]=$x;
+
+
+			}
+	}*/
+
+$months=JRequest::getVar( "months");
+
+
+$prev_month = substr($months,0,2);
+$this_month = substr($months,3,2);
+$next_month = substr($months,6,2);
+	
+	for($i=0;$i<=6;$i++)
+	{
+		$day=substr($week_days[$i],8,2);
+		$month=substr($week_days[$i],5,2);
+		$year=substr($week_days[$i],0,4);
+		
+		switch($month)
+			{
+			case $prev_month:
+			$array_days=$all_array_days[0];
+			$array_days1=$all_array_days1[0];
+			$title=$all_title[0];
+			$ev_ids=$all_ev_ids[0];
+			break;
+			
+			case $this_month:
+			$array_days=$all_array_days[1];
+			$array_days1=$all_array_days1[1];
+			$title=$all_title[1];
+			$ev_ids=$all_ev_ids[1];
+			break;
+			
+			case $next_month:
+			$array_days=$all_array_days[2];
+			$array_days1=$all_array_days1[2];
+			$title=$all_title[2];
+			$ev_ids=$all_ev_ids[2];
+			break;
+			
+			}
+			
+	
+		sort($array_days,SORT_NUMERIC );
+		
+	$week_day=date('D',mktime(0, 0, 0, $month,(int)$day , $year));
+
+
+	echo '<table style="width:100%;border-spacing:0;">
+	<tr>
+	<td style="height:'.$date_height.'px;font-size:'.$date_font_size.'px; padding-left:10px;background-color:'.$date_bg_color.'; color:#6E7276">';
+	echo '<span style="font-size:'.$week_font_size .'px;color:'.$week_font_color.'">'.week_convert($week_day).'</span> <span style="font-size:'.$day_month_font_size .'px;color:'.$day_month_font_color .'">('.month_name($month).' '.(int)$day.')</span>
+	</td>
+	';
+	echo '<tr><td>';
+	if(in_array((int)$day,$array_days))
+	{
+	foreach($title as $key=>$value)
+		{
+
+
+		if($key==(int)$day)
+			{
+
+			$ev_id=explode('<br>',$ev_ids[$key]);
+
+			array_pop($ev_id);
+
+			$ev_ids_inline=implode(',' , $ev_id);
+
+			$ev_title=explode('</p>',$value) ;
+
+			array_pop($ev_title);
+
+			for($j=0;$j<count($ev_title);$j++)
+				{
+			$query = "SELECT #__spidercalendar_event_category.color AS color FROM #__spidercalendar_event  JOIN #__spidercalendar_event_category
+	       ON #__spidercalendar_event.category=#__spidercalendar_event_category.id WHERE #__spidercalendar_event.calendar=".$calendar." AND 
+	       #__spidercalendar_event.published='1' AND #__spidercalendar_event_category.published='1' AND #__spidercalendar_event.id=".$ev_id[$j];
+
+	       $db->setQuery( $query );
+	       $cat_color = $db->loadResult();
+				if(($j+1)%2==0)
+				{
+				$color=$event_num_bg_color2;
+				$table_color=$event_bg_color2;
+				}
+				else
+				{
+				$color=$event_num_bg_color1;
+				$table_color=$event_bg_color1;
+				}
+				
+				
+							echo '<table style="height:'.$event_table_height.'px;border-spacing:0;width: 100%;background-color:'.$table_color.'"><tr><td style="font-size:'.$event_num_font_size.'px;font-weight:bold;width:15px;text-align:center;background-color:'.$cat_color.';color:'.$event_num_color.'">'.($j+1).'</td><td ><a class="modal'.$id.'"  rel="{handler: \'iframe\', size: {x: '.$popup_width.', y: '.$popup_height.'}}" style="text-decoration:none;font-size:15px;background:none;color:'.$event_title_color.'; " href="'.JRoute::_('index.php?option=com_spidercalendar&view=spidercalendarbig&theme_id='.$theme_id.'&calendar_id='.$calendar_id.'&ev_ids='.$ev_ids_inline.'&eventID='.$ev_id[$j].'&date='.$year.'-'.add_0(Month_num($month)).'-'.(int)$day).'&tmpl=component&Itemid='.$Itemid.'" ><b>'.$ev_title[$j].'</b></a></td></tr></table>';
+
+				}
+
+
+			}
+
+		}
+	}
+			else
+			{
+			echo '<table style="height:'.$event_table_height.'px;border-spacing:0;width: 100%;background-color:'.$event_bg_color1.'"><tr><td style="font-size:22px;font-weight:bold;width:15px;text-align:center;background-color:'.$event_num_bg_color1.';color:'.$event_num_color.'"></td><td ><h1 style="color:'.$event_title_color.'; border:none">&nbsp;'.JText::_('THERE_IS_NO_EVENT_IN_THIS_DAY').'</h1> </td></tr></table>';
+			}
+	echo '</td></tr>';
+	
+	echo '</table>';
+		
+	
+	}
+	
+			
+
+
+?>
+</td>
+</tr>
+				</table>
+			</tr>
+</table>
+<<<<<<< HEAD
+</td>
+</tr>
+</table>
+<?php 
+$db		=& JFactory::getDBO();
+$query = "SELECT * FROM #__spidercalendar_calendar where id=".$calendar_id."";
+	$db->setQuery( $query );
+	
+	$calendar = $db->loadObjectList();
+
+
+$user =& JFactory::getUser();
+
+$userGroups = $user->get('groups');
+
+
+
+$access=explode(',',$calendar[0]->gid);
+$userGroups=array_merge(array(),$userGroups);
+if(!$userGroups)
+$userGroups=array(1);
+foreach($userGroups as $key=>$value)
+{
+
+if (in_array($userGroups[$key],$access) ){
+echo '<a href="index.php?option=com_spidercalendar&view=add_event&calendar='.$calendar_id.'&module_id='.$id.'">'.JText::_('ADD_EVENT').'</a> 
+<a style="float:right" href="index.php?option=com_spidercalendar&view=show_events&calendar='.$calendar_id.'&module_id='.$id.'">'.JText::_('MANAGE_EVENTS').'</a>';
+break;
+}
+}
+=======
+<?php 
+echo'
+<style>
+#category_title a:hover, #category_title a:visited{
+background:#fff;
+color:#000;
+
+}
+
+</style>';
+
+$cat_ids = '';
+
+echo '<br/><br/><table class="category_table">';
+echo '<tr>';
+
+foreach($categories as $category)
+{
+?>
+<td><input type="button" name="cat_radio"  id="check_cat" style="background-color:<?php echo $category->color ?>; width:19px;" /></td>
+<td><span id="category<?php echo $category->id ?>" style="cursor:pointer;" onclick="showbigcalendar( 'bigcalendar<?php echo $id ?>','<?php echo JRoute::_('index.php?option=com_spidercalendar&view=bigcalendarweekcategory&def_view='.$defaultview.'&views='.$viewselect.'&rand='.$id.'&theme_id='.$theme_id.'&calendar='.$calendar_id.'&cat_id='.$category->id.'&cat_ids='.$cat_ids ).'&format=row&tmpl=component&Itemid='.JRequest::getVar( "Itemid","").'&months='.$prev_month.','.$this_month.','.$next_month.'&date='.$year.'-'.$month.'-'.$day ?>','<?php echo $id ?>')" > <?php echo  $category->title ?></span>
+</td>
+
+<?php
+
+
+}
+echo'</tr></table>';
+?>
+>>>>>>> SpiderCalendarJoomla25/upcoming

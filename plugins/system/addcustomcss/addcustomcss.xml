@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="1.7" group="system"	method="upgrade">
+	<name>System - Add Custom CSS</name>
+	<creationDate>2013-07-01</creationDate>
+	<author>Impression eStudio</author>
+	<authorEmail>info@impression-estudio.gr</authorEmail>
+	<authorUrl>http://joomla.impression-estudio.gr</authorUrl>
+	<copyright>All rights reserved by Impression eStudio 2013.</copyright>
+	<license>GPL 2.0</license>
+	<version>1.1.1</version>
+	<description><![CDATA[<p>Load your custom CSS file after all other CSS files and override the styles of the template and the other extensions.</p>]]></description>
+	<files>
+		<filename plugin="addcustomcss">addcustomcss.php</filename>
+		<filename>index.html</filename>
+		<folder>addcustomcss</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_system_addcustomcss.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="plugins/system/addcustomcss/addcustomcss/admin">
+			<fieldset name="basic">
+				<field name="spacer_info" type="spacerinfo" default="" label=" " description="" />
+				<field name="custom_css_file_path_1" type="text" default="" label="Custom CSS File Path 1" description="ACC_CUSTOM_CSS_FILE_PATH_1_DESCRIPTION"/>
+				<field name="custom_css_file_path_2" type="text" default="" label="Custom CSS File Path 2" description="ACC_CUSTOM_CSS_FILE_PATH_2_DESCRIPTION"/>
+				<field name="custom_css_file_path_3" type="text" default="" label="Custom CSS File Path 3" description="ACC_CUSTOM_CSS_FILE_PATH_3_DESCRIPTION"/>
+				<field name="remove_comments" type="checkbox" label="Remove Comments" description="ACC_REMOVE_COMMENTS_DESCRIPTION" value="1" default="0" />
+				<field name="minimize" type="checkbox" label="Minimize" description="ACC_MINIMIZE_DESCRIPTION" value="1" default="0" />
+				<field name="full_absolute_paths" type="checkbox" label="Full Absolute Paths" description="ACC_FULL_ABSOLUTE_PATHS_DESCRIPTION" value="1" default="0" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

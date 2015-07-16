@@ -1,0 +1,907 @@
+<<<<<<< HEAD
+<?php
+ 
+ /**
+ * @package Spider Calendar
+ * @author Web-Dorado
+ * @copyright (C) 2011 Web-Dorado. All rights reserved.
+ * @license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ **/
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+$task=JRequest::getVar('task');
+switch($task)
+{
+case 'save':
+saveNote();
+break;
+case 'save_and_new':saveNote();break;case 'cancel':cancelNote();break;
+
+}
+$session =& JFactory::getSession();
+$lists=$this->lists;
+$row=$this->row;
+$module_id=JRequest::getVar( "module_id");
+$calendar_id=JRequest::getVar( "calendar");
+
+$calendar =& JTable::getInstance('spidercalendar_calendar', 'Table');
+	// load the row from the db table
+
+$calendar->load( $calendar_id);
+$allow_publish=$calendar->allow_publish;
+
+
+		$document = &JFactory::getDocument();
+   $document->addScript("includes/js/joomla.javascript.js");
+   JHTML::_('behavior.tooltip');	
+JHTML::_('behavior.calendar');
+JRequest::setVar( 'hidemainmenu', 1 );
+$editor	=& JFactory::getEditor();
+$user =& JFactory::getUser();
+
+
+jimport('joomla.form.form');
+
+$form = &JForm::getInstance('naForm',dirname(__FILE__).DS."datefields.xml");
+
+		?>		<script language="javascript" type="text/javascript">
+window.addEvent('domready', function() {Calendar.setup({
+				inputField: "date",
+				ifFormat: "%Y-%m-%d",
+				button: "date_img",
+				align: "Tl",
+				singleClick: true,
+				firstDay: 0
+				});});
+				
+				window.addEvent('domready', function() {Calendar.setup({
+				inputField: "de_d",
+				ifFormat: "%Y-%m-%d",
+				button: "de_d_img",
+				align: "Tl",
+				singleClick: true,
+				firstDay: 0
+				});});
+<!--
+
+function submitbutton(pressbutton) {
+
+var form = document.adminForm;
+
+if (pressbutton == 'cancel_event') {
+
+submitform( pressbutton );
+
+return;
+
+}
+
+if(form.date.value.search(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/))
+{
+	  alert('Invalid Date');
+}
+else
+		if(form.date.value.search(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/))
+		{
+			  alert('Invalid Date');
+		}
+		else
+		if(form.selhour_from.value=="" && form.selminute_from.value=="" && form.selhour_to.value=="" && form.selminute_to.value=="")
+			submitform( pressbutton );
+			else
+			if(form.selhour_from.value!="" && form.selminute_from.value!="" && form.selhour_to.value=="" && form.selminute_to.value=="")
+				submitform( pressbutton );
+				else
+				if(form.selhour_from.value!="" && form.selminute_from.value!="" && form.selhour_to.value!="" && form.selminute_to.value!="")
+					submitform( pressbutton );
+					else
+					alert('Invalid Time');
+		}
+		
+function checkhour(id)
+	{	
+		if(typeof(event)!='undefined')
+		{
+			var e = event; // for trans-browser compatibility
+			var charCode = e.which || e.keyCode;
+
+				if (charCode > 31 && (charCode < 48 || charCode > 57))
+				return false;
+
+				hour=""+document.getElementById(id).value+String.fromCharCode(e.charCode);
+				hour=parseFloat(hour);
+				if((hour<0) || (hour>23))
+				return false;
+		}
+				return true;
+
+	} 
+function checkminute(id)
+	{	
+	if(typeof(event)!='undefined')
+		{
+		var e = event; // for trans-browser compatibility
+		var charCode = e.which || e.keyCode;
+
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+
+			minute=""+document.getElementById(id).value+String.fromCharCode(e.charCode);
+			minute=parseFloat(minute);
+			if((minute<0) || (minute>59))
+		return false;
+		}
+				return true;
+	}	
+	
+		function checknumber(id)
+			{	
+				if(typeof(event)!='undefined')
+				{
+					var e = event; // for trans-browser compatibility
+					var charCode = e.which || e.keyCode;
+		
+						if (charCode > 31 && (charCode < 48 || charCode > 57))
+						return false;
+		
+				}
+						return true;
+			}	
+	
+	
+	
+	
+		
+		function add_0(id)
+		{
+		
+		    input=document.getElementById(id);
+		
+		    if(input.value.length==1)
+		
+		    {
+		
+			input.value='0'+input.value;
+		
+			input.setAttribute("value", input.value);
+		
+		    }
+		
+		}
+		
+function change_type(type)
+{
+	
+	if(document.getElementById('daily1').value=='')
+		document.getElementById('daily1').value=1;
+	
+	if(document.getElementById('weekly1').value=='')
+		document.getElementById('weekly1').value=1;
+	
+	if(document.getElementById('monthly1').value=='')
+		document.getElementById('monthly1').value=1;
+	
+	if(document.getElementById('yearly1').value=='')
+		document.getElementById('yearly1').value=1;
+	
+	
+
+	switch(type)
+{
+	
+	
+	case 'no_repeat':	
+document.getElementById('daily').setAttribute('style','display:none');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').setAttribute('style','display:none');
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_until').setAttribute('style','display:none');
+//document.getElementById('repeat_input').value='';
+document.getElementById('month').value='';
+document.getElementById('date_end').value=''
+break;
+
+	case 'daily':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').setAttribute('style','display:none');
+document.getElementById('repeat').innerHTML='Day(s)'
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('daily1')};
+document.getElementById('month').value='';
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_input').value=document.getElementById('daily1').value;
+
+
+break;
+
+case 'weekly':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('weekly').removeAttribute('style');
+document.getElementById('monthly').setAttribute('style','display:none');
+document.getElementById('repeat').innerHTML='Week(s) on :'
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('weekly1')};
+document.getElementById('month').value='';
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('repeat_input').value=document.getElementById('weekly1').value;
+break;
+
+case 'monthly':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').removeAttribute('style');
+document.getElementById('repeat').innerHTML='Month(s)'
+document.getElementById('repeat_input').value=document.getElementById('monthly1').value;
+document.getElementById('month').value='';
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('monthly1')};
+break;
+
+case 'yearly':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('year_month').removeAttribute('style');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').removeAttribute('style');
+document.getElementById('repeat').innerHTML='Year(s) in '
+document.getElementById('repeat_input').value=document.getElementById('yearly1').value;
+document.getElementById('month').value='';
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('yearly1')};
+break;
+
+	
+	
+}
+		
+}
+
+function week_value()
+{
+var value='';
+for(i=1; i<=7; i++)
+{
+
+if (document.getElementById('week_'+i).checked)
+{
+	value=value+document.getElementById('week_'+i).value+',';
+	
+}
+	
+}
+document.getElementById('week').value=value;
+
+
+
+}
+
+
+		
+function radio_month()
+{
+	if(document.getElementById('radio1').checked==true)
+		{	
+		document.getElementById('monthly_list').disabled=true;
+		document.getElementById('month_week').disabled=true;
+		document.getElementById('month').disabled=false;
+		}
+	else
+	{
+	document.getElementById('month').disabled=true;
+	document.getElementById('monthly_list').disabled=false;
+		document.getElementById('month_week').disabled=false;
+	}
+	
+
+}
+
+function input_value(id)
+	
+{
+	document.getElementById(id).value=document.getElementById('repeat_input').value;
+}
+
+</script>     
+<form action="" method="post" name="adminForm" id="adminForm" >
+	<input type="hidden" id="selday" name="selday" value="<?php echo substr( $row ->date,8,2); ?>"/>
+        <input type="hidden" id="selmonth" name="selmonth" value="<?php echo substr( $row ->date,5,2)?>" />
+        <input type="hidden" id="selyear" name="selyear" value="<?php echo substr($row -> date,0,4)?>" />
+
+<div class="col width-45">
+<fieldset class="adminform">
+<legend>
+Event Details
+</legend>
+<table class="admintable">
+                <tr>
+					<td class="key">
+						<label for="message">
+							<?php echo JText::_( 'TITLE' ); ?>:
+						</label>
+					</td>
+                	<td>
+                    	<input type="text" id="title" name="title" size="41"  value="<?php echo htmlspecialchars($row->title, ENT_QUOTES); ?>" />
+                    </td>
+				</tr>    
+
+                <tr>
+					<td class="key">
+						<label for="message">
+							<?php echo JText::_( 'Date' ); ?>:
+						</label>
+					</td>
+				 
+                <td>
+                    	<?php $form->setValue('date',null,$row->date); echo $form->getInput('date'); ?><img class="calendar" id="date_img" src="administrator/templates/bluestork/images/system/calendar.png" alt="calendario" style="position:relative; top:5px" /> 
+                </td>           
+                </tr> 
+  <tr>
+					<td class="key">
+						<label for="message">
+							<?php echo JText::_( 'TIME' ); ?>:
+						</label>
+					</td>
+=======
+<?php
+ 
+ /**
+ * @package Spider Calendar
+ * @author Web-Dorado
+ * @copyright (C) 2011 Web-Dorado. All rights reserved.
+ * @license GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
+ **/
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+$task=JRequest::getVar('task');
+switch($task)
+{
+case 'save':
+saveNote();
+break;
+case 'save_and_new':saveNote();break;case 'cancel':cancelNote();break;
+
+}
+$session =& JFactory::getSession();
+$lists=$this->lists;
+$row=$this->row;$categories=$this->categories;
+$module_id=JRequest::getVar( "module_id");
+$calendar_id=JRequest::getVar( "calendar");
+
+$calendar =& JTable::getInstance('spidercalendar_calendar', 'Table');
+	// load the row from the db table
+
+$calendar->load( $calendar_id);
+$allow_publish=$calendar->allow_publish;
+
+
+		$document = &JFactory::getDocument();
+   $document->addScript("includes/js/joomla.javascript.js");
+   JHTML::_('behavior.tooltip');	
+JHTML::_('behavior.calendar');
+JRequest::setVar( 'hidemainmenu', 1 );
+$editor	=& JFactory::getEditor();
+$user =& JFactory::getUser();
+
+
+jimport('joomla.form.form');
+
+$form = &JForm::getInstance('naForm',dirname(__FILE__).DS."datefields.xml");
+
+		?>		<script language="javascript" type="text/javascript">
+window.addEvent('domready', function() {Calendar.setup({
+				inputField: "date",
+				ifFormat: "%Y-%m-%d",
+				button: "date_img",
+				align: "Tl",
+				singleClick: true,
+				firstDay: 0
+				});});
+				
+				window.addEvent('domready', function() {Calendar.setup({
+				inputField: "de_d",
+				ifFormat: "%Y-%m-%d",
+				button: "de_d_img",
+				align: "Tl",
+				singleClick: true,
+				firstDay: 0
+				});});
+<!--
+
+function submitbutton(pressbutton) {
+
+var form = document.adminForm;
+
+if (pressbutton == 'cancel_event') {
+
+submitform( pressbutton );
+
+return;
+
+}
+
+if(form.date.value.search(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/))
+{
+	  alert('Invalid Date');
+}
+else
+		if(form.date.value.search(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/))
+		{
+			  alert('Invalid Date');
+		}
+		else
+		if(form.selhour_from.value=="" && form.selminute_from.value=="" && form.selhour_to.value=="" && form.selminute_to.value=="")
+			submitform( pressbutton );
+			else
+			if(form.selhour_from.value!="" && form.selminute_from.value!="" && form.selhour_to.value=="" && form.selminute_to.value=="")
+				submitform( pressbutton );
+				else
+				if(form.selhour_from.value!="" && form.selminute_from.value!="" && form.selhour_to.value!="" && form.selminute_to.value!="")
+					submitform( pressbutton );
+					else
+					alert('Invalid Time');
+		}
+		
+function checkhour(id)
+	{	
+		if(typeof(event)!='undefined')
+		{
+			var e = event; // for trans-browser compatibility
+			var charCode = e.which || e.keyCode;
+
+				if (charCode > 31 && (charCode < 48 || charCode > 57))
+				return false;
+
+				hour=""+document.getElementById(id).value+String.fromCharCode(e.charCode);
+				hour=parseFloat(hour);
+				if((hour<0) || (hour>23))
+				return false;
+		}
+				return true;
+
+	} 
+function checkminute(id)
+	{	
+	if(typeof(event)!='undefined')
+		{
+		var e = event; // for trans-browser compatibility
+		var charCode = e.which || e.keyCode;
+
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+
+			minute=""+document.getElementById(id).value+String.fromCharCode(e.charCode);
+			minute=parseFloat(minute);
+			if((minute<0) || (minute>59))
+		return false;
+		}
+				return true;
+	}	
+	
+		function checknumber(id)
+			{	
+				if(typeof(event)!='undefined')
+				{
+					var e = event; // for trans-browser compatibility
+					var charCode = e.which || e.keyCode;
+		
+						if (charCode > 31 && (charCode < 48 || charCode > 57))
+						return false;
+		
+				}
+						return true;
+			}	
+	
+	
+	
+	
+		
+		function add_0(id)
+		{
+		
+		    input=document.getElementById(id);
+		
+		    if(input.value.length==1)
+		
+		    {
+		
+			input.value='0'+input.value;
+		
+			input.setAttribute("value", input.value);
+		
+		    }
+		
+		}
+		
+function change_type(type)
+{
+	
+	if(document.getElementById('daily1').value=='')
+		document.getElementById('daily1').value=1;
+	
+	if(document.getElementById('weekly1').value=='')
+		document.getElementById('weekly1').value=1;
+	
+	if(document.getElementById('monthly1').value=='')
+		document.getElementById('monthly1').value=1;
+	
+	if(document.getElementById('yearly1').value=='')
+		document.getElementById('yearly1').value=1;
+	
+	
+
+	switch(type)
+{
+	
+	
+	case 'no_repeat':	
+document.getElementById('daily').setAttribute('style','display:none');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').setAttribute('style','display:none');
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_until').setAttribute('style','display:none');
+//document.getElementById('repeat_input').value='';
+document.getElementById('month').value='';
+document.getElementById('date_end').value=''
+break;
+
+	case 'daily':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').setAttribute('style','display:none');
+document.getElementById('repeat').innerHTML='Day(s)'
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('daily1')};
+document.getElementById('month').value='';
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_input').value=document.getElementById('daily1').value;
+
+
+break;
+
+case 'weekly':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('weekly').removeAttribute('style');
+document.getElementById('monthly').setAttribute('style','display:none');
+document.getElementById('repeat').innerHTML='Week(s) on :'
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('weekly1')};
+document.getElementById('month').value='';
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('repeat_input').value=document.getElementById('weekly1').value;
+break;
+
+case 'monthly':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').removeAttribute('style');
+document.getElementById('repeat').innerHTML='Month(s)'
+document.getElementById('repeat_input').value=document.getElementById('monthly1').value;
+document.getElementById('month').value='';
+document.getElementById('year_month').setAttribute('style','display:none');
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('monthly1')};
+break;
+
+case 'yearly':	
+document.getElementById('daily').removeAttribute('style');
+document.getElementById('year_month').removeAttribute('style');
+document.getElementById('weekly').setAttribute('style','display:none');
+document.getElementById('monthly').removeAttribute('style');
+document.getElementById('repeat').innerHTML='Year(s) in '
+document.getElementById('repeat_input').value=document.getElementById('yearly1').value;
+document.getElementById('month').value='';
+document.getElementById('repeat_until').removeAttribute('style');
+document.getElementById('repeat_input').onchange=function onchange(event) {return input_value('yearly1')};
+break;
+
+	
+	
+}
+		
+}
+
+function week_value()
+{
+var value='';
+for(i=1; i<=7; i++)
+{
+
+if (document.getElementById('week_'+i).checked)
+{
+	value=value+document.getElementById('week_'+i).value+',';
+	
+}
+	
+}
+document.getElementById('week').value=value;
+
+
+
+}
+
+
+		
+function radio_month()
+{
+	if(document.getElementById('radio1').checked==true)
+		{	
+		document.getElementById('monthly_list').disabled=true;
+		document.getElementById('month_week').disabled=true;
+		document.getElementById('month').disabled=false;
+		}
+	else
+	{
+	document.getElementById('month').disabled=true;
+	document.getElementById('monthly_list').disabled=false;
+		document.getElementById('month_week').disabled=false;
+	}
+	
+
+}
+
+function input_value(id)
+	
+{
+	document.getElementById(id).value=document.getElementById('repeat_input').value;
+}
+
+</script>     
+<form action="" method="post" name="adminForm" id="adminForm" >
+	<input type="hidden" id="selday" name="selday" value="<?php echo substr( $row ->date,8,2); ?>"/>
+        <input type="hidden" id="selmonth" name="selmonth" value="<?php echo substr( $row ->date,5,2)?>" />
+        <input type="hidden" id="selyear" name="selyear" value="<?php echo substr($row -> date,0,4)?>" />
+
+<div class="col width-45">
+<fieldset class="adminform">
+<legend>
+Event Details
+</legend>
+<table class="admintable">
+                <tr>
+					<td class="key">
+						<label for="message">
+							<?php echo JText::_( 'Title' ); ?>:
+						</label>
+					</td>
+                	<td>
+                    	<input type="text" id="title" name="title" size="41"  value="<?php echo htmlspecialchars($row->title, ENT_QUOTES); ?>" />
+                    </td>
+				</tr>  				                  <tr>					<td class="key">						<label for="message">							<?php echo JText::_( 'Select Category' ); ?>:						</label>					</td> 	              <td>                    	<select id="category" name="category" style="width:233px" >						<option>--Select Ctegory--</option>						<?php 						foreach($categories as $category)						{?>						<option value="<?php echo $category->id?>" <?php if ($category->id==$row->category) echo 'selected="selected"';?>><?php echo $category->title?></option>																	<?php	}						?>												</select>                    </td>				</tr>				
+
+                <tr>
+					<td class="key">
+						<label for="message">
+							<?php echo JText::_( 'Date' ); ?>:
+						</label>
+					</td>
+				 
+                <td>
+                    	<?php $form->setValue('date',null,$row->date); echo $form->getInput('date'); ?><img class="calendar" id="date_img" src="administrator/templates/bluestork/images/system/calendar.png" alt="calendario" style="position:relative; top:5px" /> 
+                </td>           
+                </tr> 
+  <tr>
+					<td class="key">
+						<label for="message">
+							<?php echo JText::_( 'Time' ); ?>:
+						</label>
+					</td>
+>>>>>>> SpiderCalendarJoomla25/upcoming
+                                       <td>                                                                                                       <?php 				     if(!$row ->time)				     { 				     	$from[0]="";				     	$from[1]="";				     	$to[0]="";				     	$to[1]="";				     }				     else				     {					     $from_to = explode("-", $row ->time);					     $from    = explode(":", $from_to[0]);						if(isset($from_to[1]))					     		$to = explode(":", $from_to[1]);						else						{							$to[0]="";							$to[1]="";						}				     }				     ?>                                       <?php if($calendar->time_format==0){?>                                      <input type="text" id="selhour_from" name="selhour_from" size="1" style="text-align:right;width:30px" onkeypress="return checkhour('selhour_from')" value="<?php echo $from[0]; ?>" title="from"  onblur="add_0('selhour_from')"/> <b>:</b>                                    <input type="text" id="selminute_from" name="selminute_from" size="1" style="text-align:right;width:30px" onkeypress="return checkminute('selminute_from')" value="<?php echo substr($from[1],0,2); ?>"  title="from" onblur="add_0('selminute_from')"/> <span style="font-size:12px">&nbsp;-&nbsp;</span>                                    <input type="text" id="selhour_to" name="selhour_to" size="1" style="text-align:right;width:30px" onkeypress="return checkhour('selhour_to')" value="<?php echo $to[0]; ?>"  title="to" onblur="add_0('selhour_to')" /> <b>:</b>                                    <input type="text" id="selminute_to" name="selminute_to" size="1" style="text-align:right;width:30px" onkeypress="return checkminute('selminute_to')" value="<?php echo substr($to[1],0,2); ?>"  title="to" onblur="add_0('selminute_to')"/>                                    									<?php }   if($calendar->time_format==1){?>									 									<input type="text" id="selhour_from" name="selhour_from" size="1" style="text-align:right;width:30px" onkeypress="return check12hour('selhour_from')" value="<?php echo $from[0]; ?>" title="from"  onblur="add_0('selhour_from')"/> <b>:</b>                                    <input type="text" id="selminute_from" name="selminute_from" size="1" style="text-align:right;width:30px" onkeypress="return checkminute('selminute_from')" value="<?php echo substr($from[1],0,2); ?>"  title="from" onblur="add_0('selminute_from')"/>                                     <select id="select_from" style="width:60px" name="select_from" >									<option <?php if(substr($from[1],3,2)=="AM") echo 'selected="selected"'; ?>>AM</option>									<option <?php if(substr($from[1],3,2)=="PM") echo 'selected="selected"'; ?>>PM</option>																		</select>								   									<span style="font-size:12px">&nbsp;-&nbsp;</span>																		<input type="text" id="selhour_to" name="selhour_to" size="1" style="text-align:right;width:30px" onkeypress="return check12hour('selhour_to')" value="<?php echo $to[0]; ?>"  title="to" onblur="add_0('selhour_to')" /> <b>:</b>                                    <input type="text" id="selminute_to" name="selminute_to" size="1" style="text-align:right;width:30px" onkeypress="return checkminute('selminute_to')" value="<?php echo substr($to[1],0,2); ?>"  title="to" onblur="add_0('selminute_to')"/>                                     									 <select id="select_to" style="width:60px" name="select_to">									<option <?php if(substr($to[1],3,2)=="AM") echo 'selected="selected"'; ?>>AM</option>									<option <?php if(substr($to[1],3,2)=="PM") echo 'selected="selected"';  ?>>PM</option>																		</select>																																				<?php }?>								   </td>
+				</tr> 
+               
+<tr>
+<td class="key">
+<label for="note">
+<?php echo JText::_( 'NOTE' ); ?>:
+</label>
+</td>
+<td >
+<?php
+echo $editor->display('text_for_date',
+$row->text_for_date,'100%','250','40','6');
+?>
+</td>
+</tr>
+<tr>
+
+
+
+<?php
+if($allow_publish==1)
+{
+?>               
+<tr>
+<td class="key">
+<label for="note">
+<?php echo JText::_( 'PUBLISHED' ); ?>:
+</label>
+</td>
+<td >
+<?php
+echo $lists['published'];
+?>
+
+</td>
+</tr> 
+<?php }?>        
+</table>   
+</fieldset>     
+</div>
+
+
+
+<div class="col width-45">
+<fieldset class="adminform">
+<legend>
+Repeat Event
+</legend>
+<table>
+<tr>
+
+<td valign="top" >
+ <input type="radio" value="no_repeat"  name="repeat_method" <?php if ($row->repeat_method == 'no_repeat') echo 'checked="checked"' ?> checked="checked" onchange="change_type('no_repeat')"  /><?php echo JText::_( 'DONT_REPEAT_EVENT' ); ?><br/>
+ <input type="radio" value="daily" name="repeat_method" <?php if ($row->repeat_method == 'daily') echo 'checked="checked"' ?>  onchange="change_type('daily')"    /><?php echo JText::_( 'REPEAT_DAILY' ); ?><br/>
+ <input type="radio" value="weekly" name="repeat_method" <?php if ($row->repeat_method == 'weekly') echo 'checked="checked"' ?> onchange="change_type('weekly')" /><?php echo JText::_( 'REPEAT_WEEKLY' ); ?><br/>
+ <input type="radio" value="monthly" name="repeat_method" <?php if ($row->repeat_method == 'monthly') echo 'checked="checked"'?> onchange="change_type('monthly')"  /><?php echo JText::_( 'REPEAT_MONTHLY' ); ?><br/>
+ <input type="radio" value="yearly" name="repeat_method" <?php if ($row->repeat_method == 'yearly') echo 'checked="checked"' ?> onchange="change_type('yearly')"   /><?php echo JText::_( 'REPEAT_YEARLY' ); ?><br/>
+</td>
+   
+<td style="padding-left:10px" valign="top">
+<div id="daily" style="display:<?php if ($row->repeat_method=='no_repeat') echo 'none';  ?>">
+
+<?php echo JText::_( 'REPEAT_EVERY' ); ?> <input type="text"  id="repeat_input" size="5" name="repeat" onkeypress="return checknumber(repeat_input)" value="<?php echo $row->repeat ?>"  /> 
+<label id="repeat"><?php if($row->repeat_method=='daily') echo 'Day(s)';  
+if($row->repeat_method=='weekly') echo 'Week(s) on :';
+if($row->repeat_method=='monthly') echo 'Month(s)';
+if($row->repeat_method=='yearly') echo 'Year(s) in';
+?></label> <label id="year_month" style="display:<?php if($row->repeat_method!='yearly') echo 'none'; ?>"><?php echo $lists['year_month'] ?></label>
+<input  type="hidden" value="<?php if($row->repeat_method=='daily') echo $row->repeat ?>"    id="daily1" />
+<input type="hidden" value="<?php if($row->repeat_method=='weekly') echo $row->repeat ?>"  id="weekly1" />
+<input type="hidden"  value="<?php if($row->repeat_method=='monthly') echo $row->repeat ?>"  id="monthly1" />
+<input type="hidden" value="<?php if($row->repeat_method=='yearly') echo $row->repeat ?>"   id="yearly1" />
+
+</div><br />
+  
+
+
+
+<div class="key"  id="weekly" style="display:<?php if ($row->repeat_method!='weekly') echo 'none';  ?>">
+
+
+
+ <input type="checkbox" value="Mon"  id="week_1" onchange="week_value()" <?php if (in_array('Mon',explode(',',$row->week))) echo 'checked="checked"' ?>   />Mon
+ <input  type="checkbox" value="Tue" id="week_2"  onchange="week_value()" <?php if (in_array('Tue',explode(',',$row->week))) echo 'checked="checked"' ?>   />Tue
+ <input type="checkbox" value="Wed" id="week_3" onchange="week_value()" <?php if (in_array('Wed',explode(',',$row->week))) echo 'checked="checked"' ?> />Wed
+ <input type="checkbox" value="Thu" id="week_4" onchange="week_value()" <?php if (in_array('Thu',explode(',',$row->week))) echo 'checked="checked"' ?>  />Thu
+ <input type="checkbox" value="Fri" id="week_5"  onchange="week_value()"  <?php if (in_array('Fri',explode(',',$row->week))) echo 'checked="checked"' ?> />Fri
+ <input type="checkbox" value="Sat" id="week_6"  onchange="week_value()" <?php if (in_array('Sat',explode(',',$row->week))) echo 'checked="checked"' ?>  />Sat
+ <input type="checkbox" value="Sun" id="week_7"  onchange="week_value()"  <?php if (in_array('Sun',explode(',',$row->week))) echo 'checked="checked"' ?> />Sun
+
+<input type="hidden" name="week" id="week" value="<?php echo $row->week ?>" />
+
+
+
+</div><br />
+
+
+
+<div class="key" id="monthly" style="display:<?php if ($row->repeat_method!='monthly' && $row->repeat_method!='yearly') echo 'none';  ?>">
+<input type="radio" id="radio1" name="month_type" onchange="radio_month()" value="1" checked="checked" <?php if ($row->month_type == 1) echo 'checked="checked"' ?>  /><?php echo JText::_( 'ON_THE' ); ?>: <input type="text" name="month" size="3" onkeypress="return checknumber(month)"  id="month" value="<?php echo $row->month ?>" /><br/>
+<input type="radio" id="radio2" name="month_type" onchange="radio_month()" value="2" <?php if ($row->month_type == 2) echo 'checked="checked"' ?> /><?php echo JText::_( 'ON_THE' ); ?>: <?php echo $lists['monthly_list'] ?> <?php echo $lists['month_week'] ?>
+
+
+
+</div>  <br />
+<script>
+window.onload=radio_month();
+
+
+</script>
+
+
+</td>
+</tr>
+
+<tr id="repeat_until" style="display:<?php if($row->repeat_method=='no_repeat') echo 'none'; ?>">
+<td>
+<?php echo JText::_( 'REPEAT_UNTIL' ); ?>: </td>
+<td>
+<?php if($row->date_end=='0000-00-00') $end=""; else $end=$row->date_end;  $form->setValue('date_end',null,$end); echo $form->getInput('date_end'); ?><img class="calendar" id="de_d_img" src="administrator/templates/bluestork/images/system/calendar.png" alt="calendario" style="position:relative; top:5px" />
+</td>
+</tr>
+</table>
+
+</fieldset>
+</div>
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" name="option" value="com_spidercalendar" />
+<input type="hidden" name="id" value="<?php echo $row->id?>" />        
+<input type="hidden" name="cid[]" value="<?php echo $row->id; ?>" />        
+<input type="hidden" name="view" value="edit_event" />   
+<input type="hidden" name="calendar" value="<?php echo $lists['calendar']; ?>" />  
+<input type="hidden" name="userID" value="<?php echo $row->userID; ?>" />
+
+<input type="submit" name="save" value="Save" onclick ="Selecttask('save')" />		 <input type="submit" value="Save And New" onclick ="Selecttask('save_and_new')"/>		 <input type="submit" value="Cancel" onclick ="Selecttask('cancel')"/>
+<<<<<<< HEAD
+</form>
+<script>function Selecttask(task){if(task=='save')var action = 'index.php?option=com_spidercalendar&view=add_event&task=save';else{if(task=='save_and_new')var action = 'index.php?option=com_spidercalendar&view=add_event&task=save_and_new';elsevar action = 'index.php?option=com_spidercalendar&view=add_event&task=cancel';}document.getElementById('adminForm').setAttribute('action', action);}</script>	
+		
+        <?php
+		
+
+function saveNote(){
+	$mainframe = JFactory::getApplication();
+	$date=JRequest::getVar( 'date');
+	$date_end=JRequest::getVar( 'date_end');
+	$row =& JTable::getInstance('spidercalendar_event', 'Table');
+	$task=JRequest::getCmd('task');
+	$db =& JFactory::getDBO();
+	
+	if(!$row->bind(JRequest::get('post')))
+	{
+		JError::raiseError(500, $row->getError() );
+	}
+
+	
+	$select_from=JRequest::getVar( 'select_from');	$select_to=JRequest::getVar( 'select_to');				$row->date =$date;	if($row->repeat_method=='no_repeat')		$row->date_end=$row->date;	else		$row->date_end =JRequest::getVar( 'date_end');	if(JRequest::getVar( 'selhour_from'))	{	if(JRequest::getVar( 'selhour_to'))		$row->time = JRequest::getVar( 'selhour_from').':'.JRequest::getVar( 'selminute_from').' '.$select_from.' - '.JRequest::getVar( 'selhour_to').':'.JRequest::getVar( 'selminute_to').' '.$select_to;	else		$row->time = JRequest::getVar( 'selhour_from').':'.JRequest::getVar( 'selminute_from').' '.$select_from;	}	else	$row->time ="";
+	
+	$row->text_for_date = JRequest::getVar( 'text_for_date', '','post', 'string', JREQUEST_ALLOWRAW );
+	$row->title = JRequest::getVar( 'title', '','post', 'string', JREQUEST_ALLOWRAW );
+	
+	
+	
+	if(!$row->store()){
+		JError::raiseError(500, $row->getError() );
+	}
+=======
+</form>
+<script>function Selecttask(task){if(task=='save')var action = 'index.php?option=com_spidercalendar&view=add_event&task=save';else{if(task=='save_and_new')var action = 'index.php?option=com_spidercalendar&view=add_event&task=save_and_new';elsevar action = 'index.php?option=com_spidercalendar&view=add_event&task=cancel';}document.getElementById('adminForm').setAttribute('action', action);}</script>	
+		
+        <?php
+		
+
+function saveNote(){
+	$mainframe = JFactory::getApplication();
+	$date=JRequest::getVar( 'date');
+	$date_end=JRequest::getVar( 'date_end');
+	$row =& JTable::getInstance('spidercalendar_event', 'Table');
+	$task=JRequest::getCmd('task');
+	$db =& JFactory::getDBO();$category = JRequest::getVar( 'category');
+	
+	if(!$row->bind(JRequest::get('post')))
+	{
+		JError::raiseError(500, $row->getError() );
+	}
+
+	
+	$select_from=JRequest::getVar( 'select_from');	$select_to=JRequest::getVar( 'select_to');			$row->category =$category;	$row->date =$date;	$row->date_end =JRequest::getVar( 'date_end');	if(JRequest::getVar( 'selhour_from'))	{	if(JRequest::getVar( 'selhour_to'))		$row->time = JRequest::getVar( 'selhour_from').':'.JRequest::getVar( 'selminute_from').' '.$select_from.' - '.JRequest::getVar( 'selhour_to').':'.JRequest::getVar( 'selminute_to').' '.$select_to;	else		$row->time = JRequest::getVar( 'selhour_from').':'.JRequest::getVar( 'selminute_from').' '.$select_from;	}	else	$row->time ="";
+	
+	$row->text_for_date = JRequest::getVar( 'text_for_date', '','post', 'string', JREQUEST_ALLOWRAW );
+	$row->title = JRequest::getVar( 'title', '','post', 'string', JREQUEST_ALLOWRAW );
+	
+	
+	
+	if(!$row->store()){
+		JError::raiseError(500, $row->getError() );
+	}
+>>>>>>> SpiderCalendarJoomla25/upcoming
+	$id = $row->id;			$repeat_method = JRequest::getVar('repeat_method');	$repeat = JRequest::getVar('repeat');	$query1 = 'DELETE FROM #__spidercalendar_event_day WHERE `event_id` ='.$id ;        // Execute query    $db->setQuery( $query1 );			if (!$db->query()) {      echo "<script> alert('".$db->getErrorMsg(true)."');       window.history.go(-1); </script>\n";    }		if($repeat_method=='no_repeat')	{	    $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		$row1->event_day = $date;		$row1-> event_id =$id; 		if(!$row1->store()){		JError::raiseError(500, $row->getError() );	}	}			if($row->date < $row->date_end )	{		$ts1 = strtotime($date);        $ts2 = strtotime($date_end);        $seconds_diff = ($ts2 - $ts1);        $day_diff =  floor($seconds_diff/3600/24+1);		if($repeat_method=='daily')	{	    			    for($i=0; $i<$day_diff; $i+=$repeat)		{		    $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');			$Nextdate = strtotime(date("Y-m-d", $ts1) . " +".$i." day");			$Nextdate =  date("Y-m-d",$Nextdate);              $row1->event_day = $Nextdate;		      $row1-> event_id = $id; 			  	if(!$row1->store()){		JError::raiseError(500, $row->getError() );					}	}			}		function getweekday($date)	{		$year=substr($date,0,4);		$month=substr($date,5,-3);		$day=substr($date,8);	    $jd=gregoriantojd($month,$day,$year);		$weekday = jddayofweek($jd,2);		return $weekday;}		$weekdays = explode(',',$row->week);        $weekdays= array_slice($weekdays,0,count($weekdays)-1);	function daysDifference($beginDate,$endDate)				{								   //explode the date by "-" and storing to array				   $date_parts1=explode("-", $beginDate);				   $date_parts2=explode("-", $endDate);				   				   //gregoriantojd() Converts a Gregorian date to Julian Day Count				   $start_date=gregoriantojd($date_parts1[1], $date_parts1[2], $date_parts1[0]);				   				   $end_date=gregoriantojd($date_parts2[1], $date_parts2[2], $date_parts2[0]);				  				   return $end_date-$start_date;				   				 				}	if($repeat_method=='weekly')	{		$t = $date;	  while(daysDifference($t,$date_end)>=0)  {    $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');    $weekday=getweekday($t);	 if (in_array ($weekday ,$weekdays))	 { 	     $row1->event_day=$t;	     $row1->event_id = $id;		 if(!$row1->store())		       JError::raiseError(500, $row->getError() );	  }	  	  if($weekday=='Sun')	  {		    $r = ($repeat-1)*7+1;		    $t1 = strtotime(date("Y-m-d", strtotime($t)) . " +".$r." day");			$t =  date("Y-m-d",$t1);	  	  }	  	  else	  {	    		$t1 = strtotime(date("Y-m-d",strtotime($t)) . " + 1 day");	    $t =  date("Y-m-d",$t1);			  }     }	}		$month_type= JRequest::getVar('month_type');	$month1 = JRequest::getVar('month');	$monthly_list = JRequest::getVar('monthly_list');	$month_week = JRequest::getVar('month_week');		function monthdifferense($begindate,$enddate)	{			$datetime2 = date_create($begindate);           $datetime1 = date_create($enddate);          $interval = date_diff($datetime1, $datetime2);           $interval =  $interval->format('%m ');		   return $interval;   }      function getmonthlastday($datetime)   {           $year=substr($datetime,0,4);		$month=substr($datetime,5,-3);        if($month=='01')			$month_last_day=$year."-01-31";			if($month=='02')			{				if(((int)$year-2000)%4==0)					$month_last_day=$year."-02-29";				else					$month_last_day=$year."-02-28";			}			if($month=='03')			$month_last_day=$year."-03-31";			if($month=='04')			$month_last_day=$year."-04-30";			if($month=='05')			$month_last_day=$year."-05-31";			if($month=='06')			$month_last_day=$year."-06-30";			if($month=='07')			$month_last_day=$year."-07-31";			if($month=='08')			$month_last_day=$year."-01-31";			if($month=='09')			$month_last_day=$year."-09-30";			if($month=='10')			$month_last_day=$year."-10-31";			if($month=='11')			$month_last_day=$year."-11-30";			if($month=='12')			$month_last_day=$year."-12-31";									return $month_last_day;            }		if($repeat_method=='monthly')	{	  if( $month_type==1)	  	  {	    $year=substr($date,0,4);		$month=substr($date,5,-3);		$month_day = $year."-".$month."-".$month1;				if(date_create($date)<=date_create( $month_day))		{		   $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$month_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );	    		}				$t= $month_day;		$t = strtotime(date("Y-m-d", strtotime($t)) . " +".$repeat." month");		$t =  date("Y-m-d",$t);				while(date_create($t)<=date_create($date_end))		{		  $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$t;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );			   		$t = strtotime(date("Y-m-d", strtotime($t)) . " +".$repeat." month");		$t =  date("Y-m-d",$t);		}		}	    	  	  	  	  	   if( $month_type==2)	  {	     if($monthly_list!='last')		 {		   $p = $date;		    $year=substr($p,0,4);		    $month=substr($p,5,-3);		   $month_day = $year."-".$month."-01";		   $mon = $month_day;		   		   while(getweekday($month_day)!=$month_week)		   {		     $month_day = strtotime(date("Y-m-d", strtotime($month_day)) . " + 1 day");		     $month_day =  date("Y-m-d",$month_day); 		   		   }		   $m = $monthly_list-1;		   $month_day= strtotime(date("Y-m-d", strtotime($month_day)) . " +".$m." day");		   $month_day =  date("Y-m-d",$month_day);		   if($p<=$month_day)		   {		   $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$month_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );			}		   		    $mon = strtotime(date("Y-m-d", strtotime($mon)) . " + ".$repeat." month");			 $mon =  date("Y-m-d",$mon);			 while(date_create($mon) <= date_create($date_end))			 {			  $month_day = $mon;			while(getweekday($month_day)!=$month_week)			{			  $month_day = strtotime(date("Y-m-d", strtotime($month_day)) . " + 1 day");		     $month_day =  date("Y-m-d",$month_day);			}		   $m = $monthly_list-1;		   $month_day= strtotime(date("Y-m-d", strtotime($month_day)) . " +".$m." day");		   $month_day =  date("Y-m-d",$month_day);		   		   if(date_create($month_day) <= date_create($date_end))		   {		   $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$month_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );			  $mon = strtotime(date("Y-m-d", strtotime($mon)) . " + ".$repeat." month");			 $mon =  date("Y-m-d",$mon);  		   }		   else		   {			break;		   }					   }		   		   		 		 }		 		 else		 {		   $p=$date;		  		   $mon = $year."-".$month."-01";		    		 $month_day = getmonthlastday($date);		  $year=substr($date,0,4);		   $month=substr($date,5,-3);		  $month_first_day = $year."-".$month."-01";		  	 			 while(getweekday($month_day)!=$month_week)			 {			  $month_day = strtotime(date("Y-m-d", strtotime($month_day)) . " - 1 day");		      $month_day =  date("Y-m-d",$month_day);			 }			 if($date<=$month_day)			 {			 $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$month_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );			 		 		    }		           $month_first_day = strtotime(date("Y-m-d", strtotime($month_first_day)) . " +".$repeat." month");		     $month_first_day =  date("Y-m-d",$month_first_day);       while($month_first_day<$date_end)     {         $month_day=getmonthlastday($month_first_day);        while(getweekday($month_day)!=$month_week)       {         $month_day = strtotime(date("Y-m-d", strtotime($month_day)) . " - 1 day");		      $month_day =  date("Y-m-d",$month_day);       }        if($month_day<$date_end)  {           $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$month_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );			 $month_first_day = strtotime(date("Y-m-d", strtotime($month_first_day)) . " +".$repeat." month");		     $month_first_day =  date("Y-m-d",$month_first_day);  }}			  		 		  }			}	}		$year_month=JRequest::getVar('year_month');	$month12=0 . $year_month;		if($repeat_method=='yearly')	{	  if( $month_type==1)	  	  {	    $year=substr($date,0,4);		$year_day = $year."-".$month12 ."-".$month1;				if(date_create($date)<=date_create( $year_day))		{		   $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$year_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );	    			}					$t= $year_day;		$t = strtotime(date("Y-m-d", strtotime($t)) . " +".$repeat." year");		$t =  date("Y-m-d",$t);			while(date_create($t)<=date_create($date_end))		{		  $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$t;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );			   		$t = strtotime(date("Y-m-d", strtotime($t)) . " +".$repeat." year");		$t =  date("Y-m-d",$t);		}		}	    	  	  	  	  	   if( $month_type==2)	  {	     if($monthly_list!='last')		 {		   $p = $date;		    $year=substr($p,0,4);		   		   $year_day = $year."-".$month12."-01";		   $mon = $year_day;		   		   while(getweekday($year_day)!=$month_week)		   {		     $year_day = strtotime(date("Y-m-d", strtotime($year_day)) . " + 1 day");		     $year_day =  date("Y-m-d",$year_day); 		   		   }		   $m = $monthly_list-1;		   $year_day= strtotime(date("Y-m-d", strtotime($year_day)) . " +".$m." day");		   $year_day =  date("Y-m-d",$year_day);		   if($p<=$year_day)		   {		   $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$year_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );		    					   }		   		  $mon = strtotime(date("Y-m-d", strtotime($mon)) . " + ".$repeat." year");			 $mon =  date("Y-m-d",$mon);			 while(date_create($mon) <= date_create($date_end))			 {			  $year_day = $mon;			while(getweekday($year_day)!=$month_week)			{			  $year_day = strtotime(date("Y-m-d", strtotime($year_day)) . " + 1 day");		     $year_day =  date("Y-m-d",$year_day);			}		   $m = $monthly_list-1;		   $year_day= strtotime(date("Y-m-d", strtotime($year_day)) . " +".$m." day");		   $year_day =  date("Y-m-d",$year_day);		   		   if(date_create($year_day) <= date_create($date_end))		   {		   $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$year_day;	       $row1->event_id = $id;		   if(!$row1->store())		       JError::raiseError(500, $row->getError() );			  $mon = strtotime(date("Y-m-d", strtotime($mon)) . " + ".$repeat." year");			 $mon =  date("Y-m-d",$mon);  		   }		   else		   {			break;		   }					   }		 		 }		       else		 {		   $p=$date;		   $year=substr($date,0,4);		    		   $year_first_day = $year."-".$month12."-01";		   $year_day = getmonthlastday($month_first_day);		  	 			 while(getweekday($year_day)!=$month_week)			 {			  $year_day = strtotime(date("Y-m-d", strtotime($year_day)) . " - 1 day");		      $year_day =  date("Y-m-d",$year_day);			 }			 if($date<=$year_day)			 {			 $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		     $row1->event_day=$year_day;	         $row1->event_id = $id;		     if(!$row1->store())		       JError::raiseError(500, $row->getError() );			 		 		    }		           $year_first_day = strtotime(date("Y-m-d", strtotime($year_first_day)) . " +".$repeat." year");		     $year_first_day =  date("Y-m-d",$year_first_day);       while($year_first_day<$date_end)     {         $year_day=getmonthlastday($year_first_day);        while(getweekday($year_day)!=$month_week)       {         $year_day = strtotime(date("Y-m-d", strtotime($year_day)) . " - 1 day");		      $year_day =  date("Y-m-d",$year_day);       }        if($year_day<$date_end)  {           $row1 = & JTable::getInstance('spidercalendar_event_day', 'Table');		   $row1->event_day=$year_day;	       $row1->event_id = $id;		   if(!$row4->store())		       JError::raiseError(500, $row->getError() );			 $year_first_day = strtotime(date("Y-m-d", strtotime($year_first_day)) . " +".$repeat." year");		     $year_first_day =  date("Y-m-d",$year_first_day);  }  }			    }  }  }  }	
+				/*$row2 = & JTable::getInstance('spidercalendar_calendar', 'Table');		if($row2->email==1)		{		  $mailer = JFactory::getMailer();		  $config = JFactory::getConfig();$sender = array(     $config->getValue( 'config.mailfrom' ),    $config->getValue( 'config.fromname' ) ); $mailer->setSender($sender);$user = JFactory::getUser();$recipient = $user->email; $mailer->addRecipient($recipient);$recipient = array( 'person1@domain.com', 'person2@domain.com', 'person3@domain.com' ); $mailer->addRecipient($recipient);$body   = "Your body string\nin double quotes if you want to parse the \nnewlines etc";$mailer->setSubject('Your subject string');$mailer->setBody($body);// Optional file attached$mailer->addAttachment(JPATH_COMPONENT.DS.'assets'.DS.'document.pdf');$body   = '<h2>Our mail</h2>'    . '<div>A message to our dear readers'    . '<img src="cid:logo_id" alt="logo"/></div>';$mailer->isHTML(true);$mailer->Encoding = 'base64';$mailer->setBody($body);// Optionally add embedded image$mailer->AddEmbeddedImage( JPATH_COMPONENT.'/assets/logo128.jpg', 'logo_id', 'logo.jpg', 'base64', 'image/jpeg' );								}*/								switch ($task)	{		case 'save':			$msg = 'Event Saved';			$link = 'index.php?option=com_spidercalendar&view=show_events&calendar='.JRequest::getVar('calendar').'&module_id='.$module_id;			break;						case 'save_and_new':			$msg = 'Changes to Event Saved ';			$link = 'index.php?option=com_spidercalendar&view=add_event&calendar='.JRequest::getVar('calendar').'&module_id='.$module_id;			break;		}
+	
+	$mainframe->redirect($link, $msg);	
+	
+}	
+function cancelNote (){$mainframe = JFactory::getApplication(); $mainframe->redirect( 'index.php?option=com_spidercalendar&view=show_events&calendar='.JRequest::getVar('calendar').'&module_id='.$module_id );}
+
+		
+		

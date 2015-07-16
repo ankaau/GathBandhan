@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<metadata>
+
+	<layout title="Spider Calendar">
+
+		<message>
+
+			<![CDATA[Standart Slider layot desc]]>
+
+		</message>
+
+	</layout>
+
+	<state>
+
+		<name>Spider Calendar</name>
+
+		<description>Spider BIG Calendar</description>
+
+		<config><fields name="params"><fieldset name="Basic" label="Calendar Parameters" >
+
+			
+			<field required="required" addfieldpath="/administrator/components/com_spidercalendar/elements" name="calendar" type="calendar" default="-1" label="Select Calendar" description="itemlist" />
+			
+
+		   <field addfieldpath="/administrator/components/com_spidercalendar/elements" name="defaultview" type="defaultview" default="month" label="Default View" description="view" />		   <field addfieldpath="/administrator/components/com_spidercalendar/elements" name="viewselect" type="viewselect"  label="Select Views" description="view" />
+		</fieldset>
+		</fields>
+		</config>
+
+	</state>
+
+</metadata>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config
+	name="Sliding with rotation effect"
+	description="Scalable (scale to 50% or less recomended), combines slideing and height change. Uses images, so font can not be changed in settings."
+	images_folder="modules/mod_smartcountdown/images/digits1/">
+	<digit scope="*">
+		<styles>
+			<style name="height" unit="px" value="100" scalable="1" />
+			<style name="width" unit="px" value="70" scalable="1" />
+			<style name="border" unit="" value="medium solid #777" />
+			<style name="margin-right" unit="px" value="4" scalable="1" />
+		</styles>
+		<modes>
+			<mode name="down">
+				<group duration="400" transition="sine:in">
+					<element 
+						tag="img"
+						content_type="img"
+						value_type="next"
+						filename_base="d"
+						filename_ext=".png">
+						
+						<styles>
+							<width>100%</width>
+							
+							<height>0</height>
+							<bottom>-30%</bottom>
+						</styles>	
+						<tweens>
+							<height>30,100</height>
+							<bottom>-30, 0</bottom>
+						</tweens>
+					</element>
+					<element 
+						tag="img"
+						content_type="img"
+						value_type="prev"
+						filename_base="d"
+						filename_ext=".png">
+						
+						<styles>
+							<width>100%</width>
+							
+							<height>100%</height>
+							<top>0</top>
+						</styles>	
+						<tweens>
+							<height>100,30</height>
+							<top>0,-30</top>
+						</tweens>
+					</element>
+				</group>
+			</mode>
+			<mode name="up">
+				<group duration="400" transition="sine:in">
+					<element 
+						tag="img"
+						content_type="img"
+						value_type="next"
+						filename_base="d"
+						filename_ext=".png">
+						
+						<styles>
+							<width>100%</width>
+							<height>20%</height>
+							<top>-30%</top>
+						</styles>	
+						<tweens>
+							<top>-30,0</top>
+							<height>30,100</height>
+						</tweens>
+					</element>
+					<element 
+						tag="img"
+						content_type="img"
+						value_type="prev"
+						filename_base="d"
+						filename_ext=".png">
+						
+						<styles>
+							<width>100%</width>
+							<height>100%</height>
+						</styles>		
+						<tweens>
+							<bottom>0,-30</bottom>
+							<height>100,30</height>
+						</tweens>
+					</element>
+				</group>
+			</mode>
+		</modes>
+	</digit>
+</config>

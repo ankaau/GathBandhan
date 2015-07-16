@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<extension type="module" version="3.0" client="site"   method="upgrade">
+
+  <name>Spider Calendar</name>
+
+  <author>Web-Dorado</author>
+
+  <creationDate>January 2011</creationDate>
+
+  <copyright>Copyright (C) 2011 Web-Dorado.com 2011. All rights reserved.</copyright> 
+
+  <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+
+  <authorEmail>info@web-dorado.com</authorEmail>
+
+  <authorUrl>http://www.web-dorado.com/</authorUrl>
+
+  <version>3.2.11</version>
+
+  <description>		
+  Spider Calendar is a highly configurable Joomla extension which allows you to have multiple organized events in a calendar.
+</description>
+
+  <files>
+
+   <filename module="mod_spidercalendar">mod_spidercalendar.php</filename>
+	<filename>index.html</filename>
+	<folder>elements</folder>
+	<folder>images</folder>
+
+  </files>
+<config>
+  <fields name="params">
+
+
+  	<fieldset name="basic" label="Module Parameters">
+	
+	 <field name="buycommercialtext" type="buycommercialtext"  addfieldpath="/modules/mod_spidercalendar/elements/"  label="" />
+	 
+	 <field name="calendar" type="calendarselect"  addfieldpath="/modules/mod_spidercalendar/elements/"  label="Select Calendar" />
+	
+	<field type="buycommercial" default="" addfieldpath="/modules/mod_spidercalendar/elements/" />
+
+		</fieldset>
+		</fields>
+		</config>
+
+</extension>

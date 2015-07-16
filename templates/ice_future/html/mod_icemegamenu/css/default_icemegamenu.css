@@ -1,0 +1,213 @@
+/**
+ * IceMegaMenu Extension for Joomla 3.0 By IceTheme
+ * 
+ * 
+ * @copyright	Copyright (C) 2012 IceTheme.com. All rights reserved.
+ * @license		GNU General Public License version 2
+ * 
+ * @Website 	http://www.icetheme.com/Joomla-Extensions/icemegamenu.html
+ *
+ */
+.collapse {
+  overflow: visible;}
+ 
+/* clear some styles */
+.icemegamenu ul,
+.icemegamenu li {
+	list-style-type:none;
+	padding:0;
+	margin:0} 
+ 
+ 
+/* begin mainmenu */ 
+.icemegamenu > ul {
+	position: relative;
+	margin:0;
+	padding:0;
+	clear: both;
+	width: 100%;
+	height:45px;}
+	
+	.icemegamenu > ul > li {
+		position: relative;
+		display: block;
+		float: left;
+		margin-right:1px;
+		-webkit-transition: all .25s ease-out;
+		-moz-transition: all .25s ease-out;
+		-ms-transition: all .25s ease-out;
+		-o-transition: all .25s ease-out;
+		transition: all .25s ease-out;}
+		
+		.icemegamenu > ul > li  a.iceMenuTitle {
+			display: block;
+			font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			padding: 1px 20px 0 20px;
+			height:44px;
+			line-height: 28px;
+			font-size: 16px;
+			color: #fff;
+			text-decoration:none;
+			text-shadow: 1px 1px 1px rgba(0,0,0,.3);}
+			
+			.icemegamenu ul > li  a.iceMenuTitle:hover,
+			.icemegamenu ul > li:hover > a.iceMenuTitle,
+			.icemegamenu ul > ul > li:hover >  a.iceMenuTitle,
+			ul.icesubMenu li.active a.iceMenuTitle  { 
+				color: #ffff00 }
+				
+			div.icemegamenu ul#icemegamenu  li.active a.icemega_active > span.icemega_title{ 
+				color: #ffff00 }		
+		
+				
+			/* subtitles */
+			.icemegamenu > ul > li span.icemega_desc {
+				display:block;
+				font-size:12px;
+				font-family:Verdana, Geneva, sans-serif;
+				padding:0;
+				line-height:1.25em;
+				color:rgba(255,255,255,.6)!important;
+				margin-bottom: 7px;
+				margin-top:-6px;
+				text-shadow:none!important}
+
+ 				/* when dont have subtitle */
+				.icemegamenu > ul > li >  a.iceMenuTitle > span.icemega_nosubtitle {
+					padding-top:7px;
+					display:block}
+					
+					
+				/* when is current */	
+				.icemegamenu > ul > li:hover,
+				.icemegamenu > ul > li.active {
+					background:#3064CA}
+					
+		
+		
+		
+ /* Submenu */
+ul.icesubMenu {
+    position: absolute;
+    z-index: 600;
+    padding: 0;
+	margin:0;
+    top: 75px;
+    left: 0;
+    background: #3064CA;
+	opacity:0;
+    border: none;
+	-webkit-transition: top .25s ease-out, opacity .25s ease-out, margin .25s ease-out ;
+	-moz-transition: top .25s ease-out, opacity .25s ease-out, margin .25s ease-out;
+	-ms-transition: top .25s ease-out, opacity .25s ease-out, margin .25s ease-out;
+	-o-transition: top .25s ease-out, opacity .25s ease-out, margin .25s ease-out;
+	transition: top .25s ease-out, opacity .25s ease-out, margin .25s ease-out;
+	visibility:visible;
+	max-height:0;
+	overflow:hidden;}
+	
+	#icemegamenu > li:hover > ul.icesubMenu {
+		opacity:1;
+		top:45px;
+		visibility:visible;
+		max-height:1000px;
+		overflow:visible;
+		border: 1px solid rgba(255,255,255,.3);
+		border-top:none;
+	}
+
+	/* when there is no space on the right for the dropdown to appear */
+	#icemegamenu .ice_righttoleft {
+		left: auto!important;
+		right:0;
+	}
+			
+			ul.icesubMenu ul > li {
+				position:relative;}
+				
+				ul.icesubMenu ul > li:last-child {
+				}
+				
+				ul.icesubMenu > li a.iceMenuTitle {
+					height: auto;
+					display: block;
+					font-size: 14px;
+					font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+					padding: 0 0 0 15px;
+					line-height: 30px;
+					margin: 0 14px;
+					border-radius: 0;
+					background: url(../images/point.png) no-repeat 0 7px;
+					border-bottom: 1px dotted rgba(255, 255, 255, .2)!important;}
+	 
+	 
+				/* when is parent */
+				ul.icesubMenu li.parent {
+					background: url(../images/arrow.png) no-repeat 93% 45%;}
+				
+				
+				
+				
+				
+
+ 
+/* Second Level Dropdown */
+ul.sub_level_2,
+ul.sub_level_3,
+ul.sub_level_4,
+ul.sub_level_5 {
+	left: 100%;
+	margin-left:0;
+	top:-1px;
+	box-shadow:none;}
+	
+	ul.icesubMenu ul > li:hover > ul {
+		z-index:999;
+		opacity:1;
+		left: 100%!important;
+		margin-left: -30px!important;
+		max-height:1000px;
+		overflow:visible;
+		border: 1px solid rgba(255,255,255,.3);}
+	
+ 
+ 
+ /* Toggle for responsive */					
+.ice-megamenu-toggle {
+	 display: none;
+}
+
+.ice-megamenu-toggle a {
+    background: url("../images/mobile_menu_btn.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 30px;
+	width: 30px;
+	position:absolute;
+	cursor:pointer;
+	top:8px;
+	right:0;
+    text-indent: -9999px;}			
+
+		
+
+ 
+/* Modules inside dropdown */
+.icesubMenu .icemega_cover_module {
+    padding: 10px 15px;
+	width:auto!important;
+	color:#fff;
+	color:rgba(255,255,255,.6);
+	background: rgba(0, 0, 0, .15);
+	margin: 10px 10px 0px;
+}
+
+	.icesubMenu .icemega_cover_module span.iceModuleTile {
+		color:#fff;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-size:18px;
+		text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+		margin-bottom:6px;
+		display:block;}
+
+.icesubMenu .icemega_cover_module a {
+	color:#F0C237}

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<extension
+	type="module"
+	version="3.0.0"
+	client="site"
+	method="upgrade">
+    <name>IceSlideShow Module</name>
+    <creationDate>November 2010</creationDate>
+    <author>IceTheme</author>
+    <copyright>GNU / GPL</copyright>
+    <authorEmail>info@icetheme.com</authorEmail>
+    <authorUrl>http://www.icetheme.com</authorUrl>
+    <version>3.0.3</version>
+
+	<description>
+	<![CDATA[
+	<p class="alert alert-info">A responsive and lightweight slideshow module for your Joomla website. Easy to customize. Themes ready!</p>
+	<ul class="nav nav-tabs nav-stacked">
+		<li><a target="_blank" href="http://www.icetheme.com/joomla-extensions/iceslideshow">IceSlideShow Page</a></li>
+		<li><a target="_blank" href="http://demo.icetheme.com/extensions30">View Demo</a></li>
+		<li><a target="_blank" href="http://icetheme.com/forums">Get Support</a></li>
+	</ul>]]>
+	</description>
+     <files>
+        <filename module="mod_iceslideshow">mod_iceslideshow.php</filename>
+        <filename module="mod_iceslideshow">helper.php</filename>
+		<filename module="mod_iceslideshow">index.html</filename>
+		<filename module="mod_iceslideshow">CHANGELOG.php</filename>
+		<filename module="mod_iceslideshow">LICENSE.php</filename>
+		
+        <folder module="mod_iceslideshow">libs</folder>
+		<folder module="mod_iceslideshow">assets</folder>
+        <folder module="mod_iceslideshow">tmpl</folder>
+		<folder module="mod_iceslideshow">themes</folder>
+    </files>
+	<languages>
+		<language tag="en-GB">languages/en-GB/en-GB.mod_iceslideshow.ini</language>
+	</languages>
+	<config>
+    <fields name="params">
+		<fieldset 
+			name="basic">
+			<field 
+					name="theme" 
+					type="folderlist"
+					directory="modules/mod_iceslideshow/themes/" 
+					default=""
+					label="ICE_SLIDESHOW_THEME_LABEL" 
+					description="ICE_SLIDESHOW_THEME_DESC">
+
+			</field>
+		    <field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />
+
+			<field 
+				name="main_width" 
+				type="text" 
+				default="940" 
+				label="ICE_SLIDESHOW_MAIN_WIDTH_LABEL" 
+				description="ICE_SLIDESHOW_MAIN_WIDTH_DESC">
+			</field>
+			
+			<field 
+				name="main_height" 
+				type="text" 
+				default="460" 
+				label="ICE_SLIDESHOW_MAIN_HEIGHT_LABEL" 
+				description="ICE_SLIDESHOW_MAIN_HEIGHT_DESC">
+			</field>
+			
+		   <field 
+			name="auto_renderthumb" 
+			type="radio" 
+			class="btn-group"
+			default="1" 
+			label="ICE_SLIDESHOW_RENDER_THUMBNAIL_LABEL" 
+			description="ICE_SLIDESHOW_RENDER_THUMBNAIL_DESC">
+			  <option value="1">ICE_SLIDESHOW_JYES</option>
+			  <option value="0">ICE_SLIDESHOW_JNO</option>
+			</field>
+			<field
+				name="alway_render_thumb" 
+				type="radio"
+				class="btn-group"
+				default="0" 
+				label="ICE_SLIDESHOW_AUTO_RENDER_THUMBNAIL_LABEL" 
+				description="ICE_SLIDESHOW_AUTO_RENDER_THUMBNAIL_DESC">
+				  <option value="1">ICE_SLIDESHOW_JYES</option>
+				  <option value="0">ICE_SLIDESHOW_JNO</option>
+			</field>			
+			<field 
+				name="image_quanlity" 
+				type="text" 
+				default="75" 
+				label="ICE_SLIDESHOW_IMAGE_QUANLITY_LABEL" 
+				description="ICE_SLIDESHOW_IMAGE_QUANLITY_DESC" />		
+			<field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />		
+			
+			<field 
+				name="data_source" 
+				type="list"
+				default="content" 
+				label="ICE_SLIDESHOW_SOURCE" 
+				description="ICE_SLIDESHOW_SOURCE_DESC">
+					<option value="content">Content</option>
+			</field>
+		</fieldset>
+			
+		<fieldset name="filtering"
+				label="ICE_SLIDESHOW_FIELD_GROUP_FILTERING_LABEL"
+			>
+				<field
+					name="source_from"
+					type="list"
+					class="btn-group"
+					default="catid"
+					label="ICE_SLIDESHOW_SOURCE_FROM_LABEL"
+					description="ICE_SLIDESHOW_SOURCE_FROM_DESC">
+						<option value="catid">Category</option>
+						<option value="article_id">Articles_ID</option>
+				</field>
+				<field name="article_id"
+					type="text"
+					size="45"
+					label="ICE_SLIDESHOW_ARTICLES_ID_LABEL"
+					description="ICE_SLIDESHOW_ARTICLES_ID_DESC"/>
+				<field
+					name="catid"
+					type="category"
+					extension="com_content"
+					multiple="true"
+					default=""
+					size="10"
+					label="ICE_SLIDESHOW_JCATEGORY_LABEL"
+					description="ICE_SLIDESHOW_JCATEGORY_DESC" >
+					<option value="">ICE_SLIDESHOW_JOPTION_ALL_CATEGORIES</option>
+				</field>
+				
+				<field
+					name="ordering"
+					type="list"
+					default="a.publish_up"
+					label="ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_LABEL"
+					description="ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_DESC">
+					
+					<option
+						value="a.ordering__ASC">ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_ORDERING_ASC</option>
+					<option
+						value="a.ordering__DESC">ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_ORDERING_DESC</option>
+					<option
+						value="a.created__ASC">ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_CREATED_DATE_ASC</option>
+					<option
+						value="a.created__DESC">ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_CREATED_DATE_DESC</option>
+					<option
+						value="a.hits__ASC">ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_HITS_ASC</option>
+					<option
+						value="a.hits__DESC">ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_HITS_DESC</option>
+					<option
+						value="rand()">ICE_SLIDESHOW_ARTICLES_NEWS_FIELD_ORDERING_RANDOM</option>
+				</field>
+
+		</fieldset>
+			<fieldset name="ICE_SLIDESHOW_ITEM_SETTING">
+			
+				<field name="display_arrows" type="radio" class="btn-group" default="1" label="ICE_SLIDESHOW_DISPLAY_ARROWS_LABEL" description="ICE_SLIDESHOW_DISPLAY_ARROWS_DESC">
+					<option value="1">ICE_SLIDESHOW_JYES</option>
+					<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+				
+				<field name="display_caption" type="radio" class="btn-group" default="1" label="ICE_SLIDESHOW_DISPLAY_CAPTION_LABEL" description="ICE_SLIDESHOW_DISPLAY_CAPTION_DESC">
+					<option value="1">ICE_SLIDESHOW_JYES</option>
+					<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+				
+			<field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />
+				<field 
+					name="limit_items" 
+					type="text" 
+					default="12" 
+					label="ICE_SLIDESHOW_LIMIT_ITEMS" 
+					description="ICE_SLIDESHOW_LIMIT_ITEMS_DESC" />
+
+				<field name="show_title" 
+					type="radio"
+					class="btn-group"
+					default="1" 
+					label="ICE_SLIDESHOW_SHOWTITLE" 
+					description="ICE_SLIDESHOW_SHOWTITLE_DESC">
+						<option value="1">ICE_SLIDESHOW_JYES</option>
+						<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+
+				<field 
+					name="title_max_chars" 
+					type="text" 
+					default="100" 
+					label="ICE_SLIDESHOW_TITLE_MAX_CHARS_LABEL" 
+					description="ICE_SLIDESHOW_TITLE_MAX_CHARS_DESC" />
+
+				<field name="show_description" 
+					type="radio"
+					class="btn-group"
+					default="1" 
+					label="ICE_SLIDESHOW_SHOWDESCRIPTION" 
+					description="ICE_SLIDESHOW_SHOWDESCRIPTION_DESC">
+						<option value="1">ICE_SLIDESHOW_JYES</option>
+						<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+					
+				<field 
+					name="description_max_chars" 
+					type="text" 
+					default="100" 
+					label="ICE_SLIDESHOW_DESCIPTION_MAX_CHARS_LABEL" 
+					description="ICE_SLIDESHOW_DESCIPTION_MAX_CHARS_DESC" />
+					
+				<field 
+					name="istruncate" 
+					type="radio" 
+					class="btn-group" 
+					default="0" 
+					label="ICE_SLIDESHOW_SHOW_3DOTS" 
+					description="ICE_SLIDESHOW_SHOW_3DOTS_DESC">
+					<option value="1">ICE_SLIDESHOW_JYES</option>
+					<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+				
+				
+				<field
+					name="link_titles"
+					type="radio" 
+					label="ICE_SLIDESHOW_REAMORE_SHOW_LABEL"
+					class="btn-group"
+					description="ICE_SLIDESHOW_REAMORE_SHOW_DESC">
+					<option
+						value="1">ICE_SLIDESHOW_JYES</option>
+					<option
+						value="0">ICE_SLIDESHOW_JNO</option>
+
+				</field>
+			<field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />
+			
+				<field name="strip_tags" type="radio" class="btn-group" default="1" label="ICE_SLIDESHOW_STRIP_TAGS_LABEL" description="ICE_SLIDESHOW_STRIP_TAGS_DESC">
+					<option value="1">ICE_SLIDESHOW_JYES</option>
+					<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+				
+				
+				
+				
+				<field name="strip_tags" type="radio" class="btn-group" default="1" label="ICE_SLIDESHOW_STRIP_TAGS_LABEL" description="ICE_SLIDESHOW_STRIP_TAGS_DESC">
+					<option value="1">ICE_SLIDESHOW_JYES</option>
+					<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+				
+				
+				<field
+					name="interval"
+					type="text" 
+					default="5000" 
+					label="ICE_SLIDESHOW_INTERVAL_LABEL" 
+					description="ICE_SLIDESHOW_INTERVAL_DESC" />
+					
+				<field
+					name="effect"
+					type="list"
+					default="Slide Next"
+					label="ICE_SLIDESHOW_EFFECT_LABEL"
+					description="ICE_SLIDESHOW_EFFECT_DESC">
+					<option
+						value="">Slide (horizontal)</option>
+					<option
+						value="vertical">Slide (vertical)</option>
+				</field>
+	
+				<field 
+					name="auto_start"
+					type="radio" 
+					class="btn-group" 
+					default="0"
+					label="ICE_SLIDESHOW_AUTO_START_LABEL"
+					description="ICE_SLIDESHOW_AUTO_START_DESC">
+						<option value="1">ICE_SLIDESHOW_JYES</option>
+						<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+		</fieldset>
+		<fieldset 
+			name="advanced">
+			<field 
+				name="moduleclass_sfx" 
+				type="text" 
+				default="" 
+				label="ICE_SLIDESHOW_MODULE_CLASS_SUFFIX_LABEL" 
+				description="ICE_SLIDESHOW_MODULECLASSSUFFIX_DESC" />	
+				
+			<field name="" type="spacer" default="" label="" description="" />
+
+			<field 
+				name="enable_cache"
+				type="list" 
+				default="0" 
+				label="ICE_SLIDESHOW_CACHING_LABEL" 
+				description="ICE_SLIDESHOW_CACHING_DESC">
+					<option value="1">Use Cache Data</option>
+					<option value="0">Don't cache</option>
+				</field>
+				<field 
+					name="cache_time" 
+					type="text" 
+					default="15" 
+					label="ICE_SLIDESHOW_CACHE_TIME_LABEL"
+					description="ICE_SLIDESHOW_CACHE_TIME_DESC" />
+					
+				<field 
+					name="enable_bootrap"
+					type="radio" 
+					class="btn-group" 
+					default="0" 
+					label="ICE_SLIDESHOW_ENABLE_BOOTSTRAP_LABEL"
+					description="ICE_SLIDESHOW_ENABLE_BOOTSTRAP_DESC">					
+						<option value="1">ICE_SLIDESHOW_JYES</option>
+						<option value="0">ICE_SLIDESHOW_JNO</option>
+				</field>
+			<field name="" type="spacer" default="" label="" description="" />
+			<field name="" type="spacer" default="" label="" description="" />
+		</fieldset>
+
+	</fields>
+	</config>	
+</extension>

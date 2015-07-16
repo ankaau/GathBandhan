@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="file" version="2.5.0" method="upgrade">
+<name>Payage_PayPal</name>
+<creationDate>14 February 2015</creationDate>
+<author>Les Arbres Design</author>
+<copyright>Les Arbres Design 2015</copyright>
+<license>GNU/GPL</license>
+<authorUrl>http://www.lesarbresdesign.info</authorUrl>
+<authorEmail></authorEmail>
+<version>1.07</version>
+<description>PayPal Gateway for Payage</description>
+
+<gateway_info>
+	<type>PayPal_LesArbres</type>
+	<shortName>Paypal</shortName>
+	<longName>PayPal Website Payments Standard</longName>
+	<defaultButton>images/pay_buttons/paypal.gif</defaultButton>
+	<defaultTitle>PayPal - The safer, easier way to pay online!</defaultTitle>
+	<gatewayUrl>https://www.paypal.com/</gatewayUrl>
+	<helpUrl>http://www.lesarbresdesign.info/contact-us</helpUrl>
+	<docUrl>http://www.lesarbresdesign.info/extensions/payage</docUrl>
+</gateway_info>
+
+<fileset>
+        <files target="administrator/components/com_payage">
+            <filename>payage_paypal_lesarbres.xml</filename>
+        </files>
+
+        <files target="images">
+            <folder>pay_buttons</folder>
+        </files>
+        
+        <files target="administrator/components/com_payage/models">
+            <filename>paypal_lesarbres.php</filename>
+        </files>
+        
+        <files target="administrator/components/com_payage/forms">
+            <filename>paypal_lesarbres.xml</filename>
+        </files>
+
+        <files target="administrator/components/com_payage/">
+            <folder>language</folder>
+        </files>
+</fileset>
+
+</extension>
